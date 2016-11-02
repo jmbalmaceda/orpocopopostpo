@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.criterya.daos.LogDao;
-import com.criterya.daos.PickupDao;
+import com.criterya.daos.BlobRepository;
 import com.criterya.model.Log;
-import com.criterya.model.Pickup;
+import com.criterya.model.Blob;
 
 @SpringBootApplication
 public class PostProcessorApplication {
@@ -19,12 +19,12 @@ public class PostProcessorApplication {
 	}
 	
 	@Bean
-	public String demo(PickupDao repository, LogDao logDao) {
+	public String demo(BlobRepository repository, LogDao logDao) {
 		System.out.println(repository.count());
-		Iterable<Pickup> iterable = repository.findAll();
-		Iterator<Pickup> it = iterable.iterator();
+		Iterable<Blob> iterable = repository.getPickupByPeriodUsingId(2187399,2187499);
+		Iterator<Blob> it = iterable.iterator();
 		for (int i=0; i<100 && it.hasNext(); i++) {
-			Pickup p = it.next();
+			Blob p = it.next();
 			System.out.println(p.getId() + " - "+p.getFrame()+ " - " +p.getBlob_id()+ " - " +p.getBlob_x()+ " - " +p.getCount_blobs()+ " - " +p.getCurrent_time());
 		}
 		

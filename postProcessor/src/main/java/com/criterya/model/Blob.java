@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="pickup")
-public class Pickup {
+public class Blob {
 	@Id
 	private Integer id;
 	
