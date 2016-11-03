@@ -14,13 +14,13 @@ public class BlobRepositoryImpl implements BlobRepositoryCustom {
 	
 	@Override
 	public List<Blob> getPickupByPeriodUsingId(Integer firstId, Integer lastId) {
-		List<Blob> salida = entityManager.createQuery("FROM Blob p WHERE p.id>=:firstId and p.id<=:lastId", Blob.class).setParameter("firstId", firstId).setParameter("lastId", lastId).getResultList();
+		List<Blob> salida = entityManager.createQuery("FROM Blob p WHERE p.id>=:firstId and p.id<=:lastId ORDER BY p.id", Blob.class).setParameter("firstId", firstId).setParameter("lastId", lastId).getResultList();
 		return salida;
 	}
 
 	@Override
 	public List<Blob> getPickupByPeriodUsingId(Integer firstId) {
-		List<Blob> salida = entityManager.createQuery("FROM Blob p WHERE p.id>=:firstId", Blob.class).setParameter("firstId", firstId).getResultList();
+		List<Blob> salida = entityManager.createQuery("FROM Blob p WHERE p.id>=:firstId ORDER BY p.id", Blob.class).setParameter("firstId", firstId).getResultList();
 		return salida;
 	}
 }

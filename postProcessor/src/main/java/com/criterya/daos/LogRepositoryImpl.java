@@ -11,7 +11,7 @@ public class LogRepositoryImpl implements LogRepositoryCustom{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public Integer getLastBlobId(Log log){
+	public Integer getUltimoBlobId(Log log){
 		Integer salida = null;
 		List<Log> resultList = entityManager.createQuery("FROM Log l WHERE l.idLog > :id ORDER BY l.idLog ASC", Log.class).setParameter("id", log.getIdLog()).setMaxResults(1).getResultList();
 		if (resultList!=null && !resultList.isEmpty())

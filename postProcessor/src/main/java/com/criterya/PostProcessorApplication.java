@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.criterya.daos.BlobRepository;
 import com.criterya.daos.LogRepository;
+import com.criterya.model.Blob;
 import com.criterya.model.Log;
 
 @SpringBootApplication
@@ -21,7 +22,9 @@ public class PostProcessorApplication {
 	public String demo(BlobRepository repository, LogRepository logDao) {
 		List<Log> logs = logDao.findAll();
 		for (Log log : logs) {
-			System.out.println(log.getUbicacionVideo() + " - " +log.getNombreVideo()+" - " +log.getUltimoBlobIdLogAnterior() + " - "+logDao.getLastBlobId(log));
+			Integer ultimoBlobID = logDao.getUltimoBlobId(log);
+			List<Blob> blobs = repository.getPickupByPeriodUsingId(log.getUltimoBlobIdLogAnterior()+1, ultimoBlobID);
+			
 		}
 		return "ads";
 	}
