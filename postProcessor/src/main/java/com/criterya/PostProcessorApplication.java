@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.criterya.daos.LogDao;
+import com.criterya.daos.LogRepository;
 import com.criterya.daos.BlobRepository;
 import com.criterya.model.Log;
 import com.criterya.model.Blob;
@@ -19,7 +19,7 @@ public class PostProcessorApplication {
 	}
 	
 	@Bean
-	public String demo(BlobRepository repository, LogDao logDao) {
+	public String demo(BlobRepository repository, LogRepository logDao) {
 		System.out.println(repository.count());
 		Iterable<Blob> iterable = repository.getPickupByPeriodUsingId(2187399,2187499);
 		Iterator<Blob> it = iterable.iterator();
