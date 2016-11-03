@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.criterya.model.Log;
 
-public interface LogRepository extends JpaRepository<Log, Integer>{
+public interface LogRepository extends JpaRepository<Log, Integer>, LogRepositoryCustom{
 	List<Log> findByVideoRgb(String video_rgb);
 }
