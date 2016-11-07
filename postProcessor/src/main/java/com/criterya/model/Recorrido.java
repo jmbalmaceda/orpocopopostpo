@@ -3,6 +3,7 @@ package com.criterya.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class Recorrido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(name="blob_id")
+	private Integer idPerson;
 	private String sentidoEntrada;
 	private String sentidoSalida;
 	@ManyToOne
@@ -82,5 +85,17 @@ public class Recorrido {
 	}
 	public void setVideo(Video video) {
 		this.video = video;
+	}
+	public Integer getIdPerson() {
+		return idPerson;
+	}
+	public void setIdPerson(Integer idPerson) {
+		this.idPerson = idPerson;
+	}
+	public List<Interaccion> getInteracciones() {
+		return interacciones;
+	}
+	public void setInteracciones(List<Interaccion> interacciones) {
+		this.interacciones = interacciones;
 	}
 }

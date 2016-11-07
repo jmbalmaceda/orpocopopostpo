@@ -2,6 +2,7 @@ package com.criterya.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,15 +18,18 @@ public class Blob {
 	private Date current_time;
 	private Integer count_blobs;
 	
-	private Integer blob_id;
+	@Column(name="blob_id")
+	private Integer idPerson;
 	private Integer blob_x;
 	private Integer blob_y;
 	private Integer blob_depth;
 	
-	private Integer blob_hand_id;
+	@Column(name="blob_hand_id")
+	private Integer idHand;
 	private Integer blob_hand_x;
 	private Integer blob_hand_y;
 	private Integer blob_hand_depth;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -50,12 +54,6 @@ public class Blob {
 	public void setCount_blobs(Integer count_blobs) {
 		this.count_blobs = count_blobs;
 	}
-	public Integer getBlob_id() {
-		return blob_id;
-	}
-	public void setBlob_id(Integer blob_id) {
-		this.blob_id = blob_id;
-	}
 	public Integer getBlob_x() {
 		return blob_x;
 	}
@@ -74,12 +72,6 @@ public class Blob {
 	public void setBlob_depth(Integer blob_depth) {
 		this.blob_depth = blob_depth;
 	}
-	public Integer getBlob_hand_id() {
-		return blob_hand_id;
-	}
-	public void setBlob_hand_id(Integer blob_hand_id) {
-		this.blob_hand_id = blob_hand_id;
-	}
 	public Integer getBlob_hand_x() {
 		return blob_hand_x;
 	}
@@ -97,5 +89,17 @@ public class Blob {
 	}
 	public void setBlob_hand_depth(Integer blob_hand_depth) {
 		this.blob_hand_depth = blob_hand_depth;
+	}
+	public Integer getIdPerson() {
+		return idPerson;
+	}
+	public void setIdPerson(Integer idPerson) {
+		this.idPerson = idPerson;
+	}
+	public Integer getIdHand() {
+		return idHand;
+	}
+	public void setIdHand(Integer idHand) {
+		this.idHand = idHand;
 	}
 }
