@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.criterya.PostProcessorCommons;
 import com.criterya.model.Blob;
 
 public class BlobRepositoryImpl implements BlobRepositoryCustom {
@@ -13,9 +14,10 @@ public class BlobRepositoryImpl implements BlobRepositoryCustom {
 	private EntityManager entityManager;
 
 	public List<Integer> getPeopleId(Integer firstId, Integer lastId){
-		List<Integer> salida = entityManager.createQuery("SELECT p.idPerson FROM Blob p WHERE p.id>=:firstId and p.id<=:lastId GROUP BY p.idPerson HAVING COUNT(p)>3  ORDER BY p.id", Integer.class)
+		List<Integer> salida = entityManager.createQuery("SELECT p.idPerson FROM Blob p WHERE p.id>=:firstId and p.id<=:lastId GROUP BY p.idPerson HAVING COUNT(p)>:countMin  ORDER BY p.id", Integer.class)
 				.setParameter("firstId", firstId)
 				.setParameter("lastId", lastId)
+				.setParameter("countMin", PostProcessorCommons.MIN_COUNT_OF_BLOBS)
 				.getResultList();
 		return salida;
 	}

@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.criterya.PostProcessorCommons;
 import com.criterya.model.Blob;
 import com.criterya.model.Recorrido;
 import com.criterya.model.Video;
@@ -34,6 +35,45 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 		recorrido.setHorarioSalida(lastBlob.getCurrent_time());
 		recorrido.setIdPerson(idPerson);
 		recorrido.setVideo(video);
+		/* Calcular entrada de la persona */
+		int entradaIzq = 0;
+		int entradaDer = 0;
+		for(int i=1; i<PostProcessorCommons.MIN_COUNT_OF_BLOBS; i++){
+			Blob b1 = blobs.get(i-1);
+			Blob b2 = blobs.get(i);
+			if (b1.getBlob_x() > b2.getBlob_x())
+				entradaIzq++;
+			else if (b1.getBlob_x() < b2.getBlob_x())
+				entradaDer++;
+		}
+		if (entradaIzq>entradaDer)
+			recorrido.setSentidoEntrada(PostProcessorCommons.IZQUIERDA);
+		else
+			recorrido.setSentidoEntrada(PostProcessorCommons.DERECHA);
+		
+		/* Calcular salida de la persona */
+		int salidaIzq = 0;
+		int salidaDer = 0;
+		for(int i=blobs.size()-PostProcessorCommons.MIN_COUNT_OF_BLOBS+1; i<blobs.size(); i++){
+			Blob b1 = blobs.get(i-1);
+			Blob b2 = blobs.get(i);
+			if (b1.getBlob_x() > b2.getBlob_x())
+				salidaIzq++;
+			else if (b1.getBlob_x() < b2.getBlob_x())
+				salidaDer++;
+		}
+		if (salidaDer>salidaIzq)
+			recorrido.setSentidoSalida(PostProcessorCommons.DERECHA);
+		else
+			recorrido.setSentidoSalida(PostProcessorCommons.IZQUIERDA);
+		
+		/* Calcular promedio de los DEPTH */
+		Integer sumaAlturas = 0;
+		for (Blob blob : blobs) {
+			sumaAlturas += blob.getBlob_depth();
+		}
+		recorrido.setAltura(sumaAlturas/blobs.size());
+		
 		return recorrido ;
 	}
 	

@@ -31,7 +31,16 @@ public class Recorrido {
 	private Integer duracion;
 	@OneToMany
 	private List<Interaccion> interacciones;
+	private String sexo;
+	private Integer edad;
+	private Integer altura;
 	
+	public Integer getEdad() {
+		return edad;
+	}
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -97,5 +106,17 @@ public class Recorrido {
 	}
 	public void setInteracciones(List<Interaccion> interacciones) {
 		this.interacciones = interacciones;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public Integer getAltura() {
+		return altura;
+	}
+	public void setAltura(Integer altura) {
+		this.altura = altura;
 	}
 }
