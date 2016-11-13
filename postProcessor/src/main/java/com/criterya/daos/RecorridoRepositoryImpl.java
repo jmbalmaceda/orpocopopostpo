@@ -9,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.criterya.PostProcessorCommons;
+import com.criterya.model.Accion;
 import com.criterya.model.Blob;
+import com.criterya.model.Interaccion;
 import com.criterya.model.Recorrido;
 import com.criterya.model.Video;
 
@@ -19,6 +21,8 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 	
 	@Autowired
 	private BlobRepository blobRepository;
+	@Autowired
+	private AccionRepository accionRepository;
 	
 	private Recorrido getRecorrido(Integer idPerson, Integer firstBlobId, Integer lastBlobId, Video video){
 		List<Blob> blobs = blobRepository.getBlobs(idPerson, firstBlobId, lastBlobId);
@@ -35,6 +39,8 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 		recorrido.setHorarioSalida(lastBlob.getCurrent_time());
 		recorrido.setIdPerson(idPerson);
 		recorrido.setVideo(video);
+		List<Interaccion> interacciones = new ArrayList<>();
+		recorrido.setInteracciones(interacciones );
 		/* Calcular entrada de la persona */
 		int entradaIzq = 0;
 		int entradaDer = 0;
@@ -42,9 +48,9 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			Blob b1 = blobs.get(i-1);
 			Blob b2 = blobs.get(i);
 			if (b1.getBlob_x() > b2.getBlob_x())
-				entradaIzq++;
-			else if (b1.getBlob_x() < b2.getBlob_x())
 				entradaDer++;
+			else if (b1.getBlob_x() < b2.getBlob_x())
+				entradaIzq++;
 		}
 		if (entradaIzq>entradaDer)
 			recorrido.setSentidoEntrada(PostProcessorCommons.IZQUIERDA);
@@ -68,9 +74,36 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			recorrido.setSentidoSalida(PostProcessorCommons.IZQUIERDA);
 		
 		/* Calcular promedio de los DEPTH */
+		/* Calcular las interacciones con la góndola */
 		Integer sumaAlturas = 0;
+		boolean enGondola = false;
+		List<Blob> blobsEnGondola = new ArrayList<>();
 		for (Blob blob : blobs) {
 			sumaAlturas += blob.getBlob_depth();
+			if (blob.getIdHand()!=null){
+				if (!enGondola){
+					enGondola = true;
+				}
+				blobsEnGondola.add(blob);
+			} else if (blob.getIdHand()==null){
+				if (enGondola){
+					enGondola = false;
+					if (blobsEnGondola.size()>PostProcessorCommons.MIN_COUNT_OF_BLOBS_PICKUP){
+						// Obtener la zona de la interacción
+						// Obtener la acción
+						Accion accion = accionRepository.getAccionToca();
+						List<Accion> acciones = new ArrayList<>();
+						acciones.add(accion);
+						// Agregar la interacción
+						Interaccion interaccion = new Interaccion();
+						interaccion.setFrame(blobsEnGondola.get(0).getFrame());
+						interaccion.setAcciones(acciones);
+						interaccion.setHorario(blobsEnGondola.get(0).getCurrent_time());
+						interacciones.add(interaccion);
+					}
+					blobsEnGondola.clear();
+				}
+			}
 		}
 		recorrido.setAltura(sumaAlturas/blobs.size());
 		

@@ -25,6 +25,8 @@ public class Interaccion {
 	@ManyToOne
 	private Zona zona;
 	private Date horario;
+	private Integer frame;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -66,5 +68,11 @@ public class Interaccion {
 	}
 	public void setHorario(Date horario) {
 		this.horario = horario;
+	}
+	public Integer getFrame() {
+		return frame;
+	}
+	public void setFrame(Integer frame) {
+		this.frame = frame;
 	}
 }

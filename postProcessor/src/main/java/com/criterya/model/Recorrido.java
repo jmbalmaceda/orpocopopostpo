@@ -3,6 +3,7 @@ package com.criterya.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,14 +23,14 @@ public class Recorrido {
 	private Integer idPerson;
 	private String sentidoEntrada;
 	private String sentidoSalida;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Video video;
 	private Date horarioEntrada;
 	private Integer frameEntrada;
 	private Date horarioSalida;
 	private Integer frameSalida;
 	private Integer duracion;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST)
 	private List<Interaccion> interacciones;
 	private String sexo;
 	private Integer edad;

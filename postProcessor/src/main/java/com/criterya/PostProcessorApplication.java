@@ -31,6 +31,7 @@ public class PostProcessorApplication {
 			video.setNombre(log.getNombreVideo());
 			List<Recorrido> recorridos = recorridoDao.getRecorridos(firstBlobId, lastBlobId, video);
 			System.out.println("Log "+log.getTexto()+": "+recorridos.size());
+			recorridoDao.save(recorridos);
 		}
 		return "ads";
 	}
