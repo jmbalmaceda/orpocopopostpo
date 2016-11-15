@@ -25,6 +25,8 @@ public class Log {
 	private String video_depth;
 	@Transient
 	private File videoFile;
+	@Transient
+	private Boolean selected = Boolean.FALSE;
 
 	public String getUbicacionVideo(){
 		String ubicacion = null;
@@ -85,5 +87,18 @@ public class Log {
 
 	public void setUltimoBlobIdLogAnterior(Integer ultimoBlobIdLogAnterior) {
 		this.ultimoBlobIdLogAnterior = ultimoBlobIdLogAnterior;
+	}
+
+	@Override
+	public String toString() {
+		return this.fecha+" - "+this.texto;
+	}
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 }

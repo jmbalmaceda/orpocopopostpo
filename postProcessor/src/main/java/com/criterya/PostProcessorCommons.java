@@ -1,5 +1,7 @@
 package com.criterya;
 
+import java.text.SimpleDateFormat;
+
 public class PostProcessorCommons {
 	/**
 	 * Cantidad mínima de cuadros que deben existir para que se lo considere como una persona
@@ -19,5 +21,6 @@ public class PostProcessorCommons {
 	public static final String ACCION_DEVUELVE = "devuelve";
 	public static final String DESCRIPCION_ACCION_DEVUELVE = "El cliente devuelve un producto a la góndola";
 	
-	
+	public static SimpleDateFormat fechaFormatter = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm:ss");
 }
