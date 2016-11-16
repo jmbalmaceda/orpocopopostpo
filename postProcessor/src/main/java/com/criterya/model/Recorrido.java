@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.criterya.PostProcessorCommons;
+
 @Entity
 @Table(name="recorrido")
 public class Recorrido {
@@ -119,5 +121,9 @@ public class Recorrido {
 	}
 	public void setAltura(Integer altura) {
 		this.altura = altura;
+	}
+	@Override
+	public String toString() {
+		return horarioEntrada+" - "+duracion;
 	}
 }

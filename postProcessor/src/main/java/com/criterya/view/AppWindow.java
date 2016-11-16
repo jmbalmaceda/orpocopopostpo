@@ -19,6 +19,8 @@ public class AppWindow {
 	private JFrame frame;
 	@Autowired
 	private LogsPanel logsPanel;
+	@Autowired
+	private RecorridosPanel recorridosPanel;
 
 	public void show(){
 		EventQueue.invokeLater(new Runnable() {
@@ -57,6 +59,7 @@ public class AppWindow {
 		mntmCargarLogs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logsPanel.loadLogs();
+				frame.getContentPane().removeAll();
 				frame.getContentPane().add(logsPanel, BorderLayout.CENTER);
 				frame.getContentPane().revalidate();
 			}
@@ -65,6 +68,16 @@ public class AppWindow {
 		
 		JMenu mnRecorridos = new JMenu("Recorridos");
 		menuBar.add(mnRecorridos);
+		
+		JMenuItem mntmCargarRecorridos = new JMenuItem("Cargar recorridos");
+		mntmCargarRecorridos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(recorridosPanel, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+			}
+		});
+		mnRecorridos.add(mntmCargarRecorridos);
 		
 		JMenu mnAplicacin = new JMenu("Aplicación");
 		menuBar.add(mnAplicacin);

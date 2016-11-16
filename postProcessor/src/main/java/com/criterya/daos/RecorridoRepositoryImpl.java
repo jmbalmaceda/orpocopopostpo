@@ -1,6 +1,7 @@
 package com.criterya.daos;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -121,6 +122,15 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			recorridos.add(recorrido );
 		}
 		return recorridos ;
+	}
+
+	@Override
+	public List<Recorrido> getRecorridos(Date dateFrom, Date dateTo) {
+		List<Recorrido> salida = entityManager.createQuery("FROM Recorrido WHERE horarioEntrada BETWEEN :dateFrom AND :dateTo", Recorrido.class)
+			.setParameter("dateFrom", dateFrom)
+			.setParameter("dateTo", dateTo)
+			.getResultList();
+		return salida;
 	}
 
 }
