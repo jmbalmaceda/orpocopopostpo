@@ -8,9 +8,14 @@ import com.criterya.view.AppWindow;;
 
 @SpringBootApplication
 public class PostProcessorApplication {
+	public static ConfigurableApplicationContext context;
+	
+	public static ConfigurableApplicationContext getContext(){
+		return context;
+	}
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = new SpringApplicationBuilder(PostProcessorApplication.class).headless(false).run(args);
+		context = new SpringApplicationBuilder(PostProcessorApplication.class).headless(false).run(args);
 		AppWindow app = context.getBean(AppWindow.class);
 		app.show();
 	}

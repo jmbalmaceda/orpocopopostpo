@@ -1,35 +1,35 @@
 package com.criterya.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
-import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.criterya.PostProcessorApplication;
 import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Recorrido;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.Box;
-import java.awt.Component;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-@org.springframework.stereotype.Component
+@Component
 public class RecorridosPanel extends JPanel {
 	/**
 	 * 
@@ -73,6 +73,19 @@ public class RecorridosPanel extends JPanel {
 		btnNewButton.setIcon(new ImageIcon(RecorridosPanel.class.getResource("/icons/add.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Recorrido newRecorrido = new Recorrido();
+				newRecorrido.setAltura(0);
+				newRecorrido.setDuracion(0);
+				newRecorrido.setEdad(0);
+				newRecorrido.setFrameEntrada(0);
+				newRecorrido.setFrameSalida(0);
+				RecorridoPanel panel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
+				
+				JFrame f = new JFrame();
+			    f.setLayout(new BorderLayout());
+			    f.add(panel, BorderLayout.CENTER);
+			    f.pack();
+			    f.setVisible(true);
 			}
 		});
 		
