@@ -29,6 +29,9 @@ import org.springframework.stereotype.Component;
 import com.criterya.PostProcessorApplication;
 import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Recorrido;
+
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 @Component
 public class RecorridosPanel extends JPanel {
 	/**
@@ -40,6 +43,7 @@ public class RecorridosPanel extends JPanel {
 	private JSpinner spinnerDesde;
 	private JSpinner spinnerHasta;
 	private DefaultComboBoxModel<Recorrido> modelRecorridos;
+	private Recorrido recorridoSeleccionado;
 
 	/**
 	 * Create the panel.
@@ -52,6 +56,13 @@ public class RecorridosPanel extends JPanel {
 		
 		modelRecorridos = new DefaultComboBoxModel<>();
 		JList<Recorrido> listRecorridos = new JList<>(modelRecorridos);
+		listRecorridos.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()){
+					recorridoSeleccionado = (Recorrido) e.getSource();
+				}
+			}
+		});
 		listRecorridos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listRecorridos);
 		
@@ -62,8 +73,9 @@ public class RecorridosPanel extends JPanel {
 		JPanel videoPanel = new JPanel();
 		centerPanel.add(videoPanel, BorderLayout.CENTER);
 		
-		JPanel infoVideoPanel = new JPanel();
+		final JPanel infoVideoPanel = new JPanel();
 		centerPanel.add(infoVideoPanel, BorderLayout.SOUTH);
+		infoVideoPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel accionesRecorridoPanel = new JPanel();
 		centerPanel.add(accionesRecorridoPanel, BorderLayout.WEST);
@@ -79,13 +91,20 @@ public class RecorridosPanel extends JPanel {
 				newRecorrido.setEdad(0);
 				newRecorrido.setFrameEntrada(0);
 				newRecorrido.setFrameSalida(0);
+				if (recorridoSeleccionado!=null)
+					newRecorrido.setVideo(recorridoSeleccionado.getVideo());
 				RecorridoPanel panel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
 				
+				infoVideoPanel.add(panel, BorderLayout.CENTER);
+				infoVideoPanel.revalidate();
+				infoVideoPanel.repaint();
+				/*
 				JFrame f = new JFrame();
-			    f.setLayout(new BorderLayout());
-			    f.add(panel, BorderLayout.CENTER);
+			    f.getContentPane().setLayout(new BorderLayout());
+			    f.getContentPane().add(panel, BorderLayout.CENTER);
 			    f.pack();
 			    f.setVisible(true);
+			    */
 			}
 		});
 		

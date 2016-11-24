@@ -62,6 +62,7 @@ public class AppWindow {
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(logsPanel, BorderLayout.CENTER);
 				frame.getContentPane().revalidate();
+				frame.getContentPane().repaint();
 			}
 		});
 		mnLogs.add(mntmCargarLogs);
@@ -75,6 +76,7 @@ public class AppWindow {
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(recorridosPanel, BorderLayout.CENTER);
 				frame.getContentPane().revalidate();
+				frame.getContentPane().repaint();
 			}
 		});
 		mnRecorridos.add(mntmCargarRecorridos);
