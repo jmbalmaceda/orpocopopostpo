@@ -303,7 +303,7 @@ public class RecorridoPanel extends JPanel {
 		//
 		BeanProperty<Recorrido, Integer> idProperty = BeanProperty.create("id");
 		BeanProperty<JLabel, String> textProperty_5 = BeanProperty.create("text");
-		AutoBinding<Recorrido, Integer, JLabel, String> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ, recorrido, idProperty, idJLabel, textProperty_5);
+		AutoBinding<Recorrido, Integer, JLabel, String> autoBinding_5 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, recorrido, idProperty, idJLabel, textProperty_5);
 		autoBinding_5.bind();
 		//
 		BeanProperty<Recorrido, Integer> idPersonProperty = BeanProperty.create("idPerson");

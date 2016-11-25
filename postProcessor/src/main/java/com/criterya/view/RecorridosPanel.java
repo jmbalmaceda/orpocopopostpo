@@ -12,7 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -22,6 +21,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,9 +30,7 @@ import org.springframework.stereotype.Component;
 import com.criterya.PostProcessorApplication;
 import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Recorrido;
-
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
+import javax.swing.JTextField;
 @Component
 public class RecorridosPanel extends JPanel {
 	/**
@@ -44,6 +43,9 @@ public class RecorridosPanel extends JPanel {
 	private JSpinner spinnerHasta;
 	private DefaultComboBoxModel<Recorrido> modelRecorridos;
 	private Recorrido recorridoSeleccionado;
+	private Date dateFrom;
+	private Date dateTo;
+	private JPanel infoVideoPanel;
 
 	/**
 	 * Create the panel.
@@ -55,11 +57,16 @@ public class RecorridosPanel extends JPanel {
 		add(scrollPane, BorderLayout.WEST);
 		
 		modelRecorridos = new DefaultComboBoxModel<>();
-		JList<Recorrido> listRecorridos = new JList<>(modelRecorridos);
+		final JList<Recorrido> listRecorridos = new JList<>(modelRecorridos);
 		listRecorridos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()){
-					recorridoSeleccionado = (Recorrido) e.getSource();
+					recorridoSeleccionado = (Recorrido) listRecorridos.getSelectedValue();
+					RecorridoPanel panel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
+					panel.setRecorrido(recorridoSeleccionado);
+					infoVideoPanel.add(panel, BorderLayout.CENTER);
+					infoVideoPanel.revalidate();
+					infoVideoPanel.repaint();
 				}
 			}
 		});
@@ -73,7 +80,7 @@ public class RecorridosPanel extends JPanel {
 		JPanel videoPanel = new JPanel();
 		centerPanel.add(videoPanel, BorderLayout.CENTER);
 		
-		final JPanel infoVideoPanel = new JPanel();
+		infoVideoPanel = new JPanel();
 		centerPanel.add(infoVideoPanel, BorderLayout.SOUTH);
 		infoVideoPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -109,6 +116,14 @@ public class RecorridosPanel extends JPanel {
 		});
 		
 		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (recorridoSeleccionado!=null){
+					recorridoRepository.delete(recorridoSeleccionado);
+					loadRecorridos(dateFrom, dateTo);
+				}
+			}
+		});
 		btnNewButton_1.setIcon(new ImageIcon(RecorridosPanel.class.getResource("/icons/delete.png")));
 		GroupLayout gl_accionesRecorridoPanel = new GroupLayout(accionesRecorridoPanel);
 		gl_accionesRecorridoPanel.setHorizontalGroup(
@@ -155,8 +170,8 @@ public class RecorridosPanel extends JPanel {
 		JButton btnFiltrarRegistros = new JButton("Filtrar Recorridos");
 		btnFiltrarRegistros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date dateFrom = (Date)spinnerDesde.getValue();
-				Date dateTo = (Date)spinnerHasta.getValue();
+				dateFrom = (Date)spinnerDesde.getValue();
+				dateTo = (Date)spinnerHasta.getValue();
 				loadRecorridos(dateFrom, dateTo);
 			}
 		});

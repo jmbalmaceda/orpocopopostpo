@@ -23,17 +23,17 @@ public class PostProcessorApplication {
 		LogRepository logRepository = context.getBean(LogRepository.class);
 		Log log1 = new Log();
 		log1.setIdLog(0);
-		log1.setFecha(Calendar.getInstance().getTime());
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2016);
+		cal.set(Calendar.MONTH, 8); // corresponde a Septiembre
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		cal.set(Calendar.HOUR_OF_DAY, 9);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		log1.setFecha(cal.getTime());
 		log1.setTexto("Log de prueba");
-		log1.setUltimoBlobIdLogAnterior(0);
+		log1.setUltimoBlobIdLogAnterior(105600);
 		log1.setVideoRgb("video_test.avi");
-		logRepository.save(log1);
-		log1 = new Log();
-		log1.setIdLog(1);
-		log1.setFecha(Calendar.getInstance().getTime());
-		log1.setTexto("Log de prueba2");
-		log1.setUltimoBlobIdLogAnterior(0);
-		log1.setVideoRgb("video_test_2.avi");
 		logRepository.save(log1);
 	}
 	

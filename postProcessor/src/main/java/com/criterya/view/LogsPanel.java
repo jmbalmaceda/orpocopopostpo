@@ -24,14 +24,23 @@ import org.springframework.stereotype.Component;
 
 import com.criterya.PostProcessorCommons;
 import com.criterya.daos.LogRepository;
+import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Log;
+import com.criterya.model.Recorrido;
+
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @Component
 public class LogsPanel extends JPanel {
 	private static final long serialVersionUID = 5870801492344409880L;
 
 	@Autowired
-	LogRepository logRepository;
+	private LogRepository logRepository;
+	@Autowired
+	private RecorridoRepository recorridoRepository;
 
 	private JList<Log> list;
 	private JTextField tfId;
@@ -113,79 +122,93 @@ public class LogsPanel extends JPanel {
 
 		tfVideoDEPTH = new JTextField();
 		tfVideoDEPTH.setColumns(10);
+		
+		JButton btnGenerarRecorridos = new JButton("Generar Recorridos");
+		btnGenerarRecorridos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedLog!=null){
+					Integer firstId = logRepository.getPrimerBlobId(selectedLog);
+					Integer lastId = logRepository.getUltimoBlobId(selectedLog);
+					List<Recorrido> recorridos = recorridoRepository.getRecorridos(firstId, lastId, null);
+					recorridoRepository.save(recorridos);
+				}
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblltimoBlobid, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-														.addComponent(lblHora, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(lblDa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(lblId, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-														.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-																.addComponent(lblTexto, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(lblPrimerBlobid, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-																.addPreferredGap(ComponentPlacement.UNRELATED)
-																.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																		.addComponent(tfPrimerBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																		.addComponent(tfTexto, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-																		.addComponent(tfHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																		.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-																				.addComponent(tfDia, Alignment.LEADING)
-																				.addComponent(tfId, Alignment.LEADING))))
-																				.addGroup(gl_panel.createSequentialGroup()
-																						.addContainerGap()
-																						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																								.addComponent(lblVideoRgb)
-																								.addComponent(lblVideoDepth))
-																								.addGap(27)
-																								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																										.addComponent(tfUltimoBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																										.addComponent(tfVideoRGB, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-																										.addComponent(tfVideoDEPTH, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))))
-																										.addContainerGap())
-				);
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblltimoBlobid, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(lblHora, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblDa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblId, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(lblTexto, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblPrimerBlobid, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tfPrimerBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tfTexto, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+								.addComponent(tfHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(tfDia, Alignment.LEADING)
+									.addComponent(tfId, Alignment.LEADING))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblVideoRgb)
+								.addComponent(lblVideoDepth))
+							.addGap(27)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tfUltimoBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tfVideoRGB)
+								.addComponent(tfVideoDEPTH)))
+						.addComponent(btnGenerarRecorridos))
+					.addContainerGap())
+		);
 		gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblId)
-								.addComponent(tfId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblDa)
-										.addComponent(tfDia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblHora)
-												.addComponent(tfHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-														.addComponent(lblTexto)
-														.addComponent(tfTexto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																.addComponent(lblPrimerBlobid)
-																.addComponent(tfPrimerBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																		.addComponent(lblltimoBlobid)
-																		.addComponent(tfUltimoBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(ComponentPlacement.RELATED)
-																		.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																				.addComponent(lblVideoRgb)
-																				.addComponent(tfVideoRGB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																				.addPreferredGap(ComponentPlacement.RELATED)
-																				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-																						.addComponent(lblVideoDepth)
-																						.addComponent(tfVideoDEPTH, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																						.addContainerGap(199, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblId)
+						.addComponent(tfId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDa)
+						.addComponent(tfDia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblHora)
+						.addComponent(tfHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTexto)
+						.addComponent(tfTexto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPrimerBlobid)
+						.addComponent(tfPrimerBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblltimoBlobid)
+						.addComponent(tfUltimoBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblVideoRgb)
+						.addComponent(tfVideoRGB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblVideoDepth)
+						.addComponent(tfVideoDEPTH, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnGenerarRecorridos)
+					.addContainerGap(63, Short.MAX_VALUE))
+		);
 		panel.setLayout(gl_panel);
 	}
 
