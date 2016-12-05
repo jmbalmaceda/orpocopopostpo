@@ -46,6 +46,7 @@ public class RecorridosPanel extends JPanel {
 	private Date dateFrom;
 	private Date dateTo;
 	private JPanel infoVideoPanel;
+	private JPanel videoPanel;
 
 	/**
 	 * Create the panel.
@@ -62,9 +63,17 @@ public class RecorridosPanel extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()){
 					recorridoSeleccionado = (Recorrido) listRecorridos.getSelectedValue();
-					RecorridoPanel panel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
-					panel.setRecorrido(recorridoSeleccionado);
-					infoVideoPanel.add(panel, BorderLayout.CENTER);
+					RecorridoPanel infoPanel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
+					infoPanel.setRecorrido(recorridoSeleccionado);
+					
+					VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+					videoPanelBean.setVideoFile("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
+					videoPanelBean.setFrameNum(recorridoSeleccionado.getFrameEntrada());
+					videoPanel.add(videoPanelBean);
+					videoPanel.revalidate();
+					videoPanel.repaint();
+					
+					infoVideoPanel.add(infoPanel, BorderLayout.CENTER);
 					infoVideoPanel.revalidate();
 					infoVideoPanel.repaint();
 				}
@@ -77,7 +86,7 @@ public class RecorridosPanel extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel videoPanel = new JPanel();
+		videoPanel = new JPanel();
 		centerPanel.add(videoPanel, BorderLayout.CENTER);
 		
 		infoVideoPanel = new JPanel();

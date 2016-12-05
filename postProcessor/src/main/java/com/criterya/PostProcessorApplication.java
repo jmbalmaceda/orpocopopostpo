@@ -33,7 +33,7 @@ public class PostProcessorApplication {
 		log1.setFecha(cal.getTime());
 		log1.setTexto("Log de prueba");
 		log1.setUltimoBlobIdLogAnterior(105600);
-		log1.setVideoRgb("video_test.avi");
+		log1.setVideoRgb("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
 		logRepository.save(log1);
 	}
 	
