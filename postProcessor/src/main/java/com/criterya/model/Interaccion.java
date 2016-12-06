@@ -3,23 +3,28 @@ package com.criterya.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 import com.criterya.PostProcessorCommons;
 
 @Entity
 @Table(name="interaccion")
+@NamedEntityGraph(name="path.Interaccion.acciones", attributeNodes = @NamedAttributeNode(value="acciones"))
 public class Interaccion {
 	@Id
 	@GeneratedValue( strategy=GenerationType.AUTO)
 	private Integer id;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Accion> acciones;
 	private Integer x;
 	private Integer y;
