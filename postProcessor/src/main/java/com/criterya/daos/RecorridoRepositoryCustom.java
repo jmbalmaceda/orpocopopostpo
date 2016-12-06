@@ -9,4 +9,5 @@ import com.criterya.model.Video;
 public interface RecorridoRepositoryCustom {
 	List<Recorrido> getRecorridos(Integer firstId, Integer lastId, Video video);
 	List<Recorrido> getRecorridos(Date dateFrom, Date dateTo);
+	Recorrido loadInteracciones(Recorrido recorridoSeleccionado);
 }

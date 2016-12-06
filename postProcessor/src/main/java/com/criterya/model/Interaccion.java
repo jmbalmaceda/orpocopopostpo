@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.criterya.PostProcessorCommons;
+
 @Entity
 @Table(name="interaccion")
 public class Interaccion {
@@ -26,6 +28,8 @@ public class Interaccion {
 	private Zona zona;
 	private Date horario;
 	private Integer frame;
+	
+	
 	
 	public Integer getId() {
 		return id;
@@ -74,5 +78,9 @@ public class Interaccion {
 	}
 	public void setFrame(Integer frame) {
 		this.frame = frame;
+	}
+	@Override
+	public String toString() {
+		return PostProcessorCommons.horaFormatter.format(horario)+ " - "+frame;
 	}
 }

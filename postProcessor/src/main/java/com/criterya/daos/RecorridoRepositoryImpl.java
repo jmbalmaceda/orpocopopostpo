@@ -2,8 +2,11 @@ package com.criterya.daos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -130,6 +133,18 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			.setParameter("dateFrom", dateFrom)
 			.setParameter("dateTo", dateTo)
 			.getResultList();
+		return salida;
+	}
+
+	@Override
+	public Recorrido loadInteracciones(Recorrido recorridoSeleccionado) {
+		EntityGraph<Recorrido> graph = this.entityManager.createEntityGraph(Recorrido.class);
+		graph.addAttributeNodes("interacciones");
+		    
+		Map<String, Object> hints = new HashMap<String, Object>();
+		hints.put("javax.persistence.loadgraph", graph);
+		  
+		Recorrido salida = this.entityManager.find(Recorrido.class, recorridoSeleccionado.getId(), hints);
 		return salida;
 	}
 

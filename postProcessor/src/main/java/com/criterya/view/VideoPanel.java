@@ -71,6 +71,11 @@ public class VideoPanel extends JPanel {
 		comandosPanel.setLayout(gbl_comandosPanel);
 		
 		JButton prevFrameButton = new JButton("<");
+		prevFrameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				prevFrame();
+			}
+		});
 		GridBagConstraints gbc_prevFrameButton = new GridBagConstraints();
 		gbc_prevFrameButton.insets = new Insets(0, 0, 0, 5);
 		gbc_prevFrameButton.gridx = 7;
@@ -157,6 +162,13 @@ public class VideoPanel extends JPanel {
 	private void nextFrame(){
 		if (this.frameNum < this.maxFrame){
 			this.frameNum++;
+			showFrame();
+		}
+	}
+	
+	private void prevFrame(){
+		if (this.frameNum>0){
+			this.frameNum--;
 			showFrame();
 		}
 	}

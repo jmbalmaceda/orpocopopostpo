@@ -31,9 +31,8 @@ import org.springframework.stereotype.Component;
 
 import com.criterya.PostProcessorApplication;
 import com.criterya.daos.RecorridoRepository;
+import com.criterya.model.Interaccion;
 import com.criterya.model.Recorrido;
-
-import javax.swing.JSeparator;
 @Component
 public class RecorridosPanel extends JPanel {
 	/**
@@ -49,6 +48,7 @@ public class RecorridosPanel extends JPanel {
 	private Date dateFrom;
 	private Date dateTo;
 	private JPanel videoPanel;
+	private JList<Interaccion> listInteracciones;
 
 	/**
 	 * Create the panel.
@@ -185,9 +185,23 @@ public class RecorridosPanel extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()){
 					recorridoSeleccionado = (Recorrido) listRecorridos.getSelectedValue();
+					
+					// Info del recorrido
+					/*
 					RecorridoPanel infoPanel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
 					infoPanel.setRecorrido(recorridoSeleccionado);
+					*/
 					
+					// Interacciones del recorrido
+					recorridoSeleccionado = recorridoRepository.loadInteracciones(recorridoSeleccionado);
+					List<Interaccion> interacciones = recorridoSeleccionado.getInteracciones();
+					DefaultComboBoxModel<Interaccion> model = new DefaultComboBoxModel<>();
+					for (Interaccion interaccion : interacciones) {
+						model.addElement(interaccion);
+					}
+					listInteracciones.setModel(model);
+					
+					// Video del recorrido
 					VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
 					videoPanelBean.setVideoFile("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
 					videoPanelBean.setFrameNum(recorridoSeleccionado.getFrameEntrada());
@@ -203,9 +217,20 @@ public class RecorridosPanel extends JPanel {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panel.setRightComponent(scrollPane_1);
 		
-		JList list = new JList();
-		list.setBorder(new TitledBorder(null, "Interacciones del recorrido seleccionado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		scrollPane_1.setViewportView(list);
+		listInteracciones = new JList<>();
+		listInteracciones.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()){
+					Interaccion interaccionSeleccionada = listInteracciones.getSelectedValue();
+					if (interaccionSeleccionada!=null){
+						VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+						videoPanelBean.setFrameNum(interaccionSeleccionada.getFrame());
+					}
+				}
+			}
+		});
+		listInteracciones.setBorder(new TitledBorder(null, "Interacciones del recorrido seleccionado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollPane_1.setViewportView(listInteracciones);
 	}
 
 	public void loadRecorridos(Date dateFrom, Date dateTo) {

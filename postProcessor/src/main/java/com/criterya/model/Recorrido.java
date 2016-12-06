@@ -6,17 +6,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.criterya.PostProcessorCommons;
-
 @Entity
 @Table(name="recorrido")
+@NamedEntityGraph(name="path.Recorrido.interacciones", attributeNodes = @NamedAttributeNode(value="interacciones"))
 public class Recorrido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,7 +34,7 @@ public class Recorrido {
 	private Date horarioSalida;
 	private Integer frameSalida;
 	private Integer duracion;
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<Interaccion> interacciones;
 	private String sexo;
 	private Integer edad;
