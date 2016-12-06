@@ -2,21 +2,19 @@ package com.criterya.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.lang.reflect.Field;
 
-import javax.swing.Box;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -24,15 +22,18 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
 import org.springframework.stereotype.Component;
 
+import com.criterya.PostProcessorApplication;
+
 @Component
 public class VideoPanel extends JPanel {
 	private static final long serialVersionUID = 6984235223569864264L;
 	private String videoFile;
 	private double frameNum = 0;
+	private double maxFrame = 0;
 	private JPanel videoPanel;
 	private VideoCapture capture;
 	private static Mat image;
-	
+
 	static{
 		try {
 
@@ -59,44 +60,45 @@ public class VideoPanel extends JPanel {
 	 */
 	public VideoPanel() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel comandosPanel = new JPanel();
 		add(comandosPanel, BorderLayout.SOUTH);
+		GridBagLayout gbl_comandosPanel = new GridBagLayout();
+		gbl_comandosPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_comandosPanel.rowHeights = new int[]{0, 0};
+		gbl_comandosPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_comandosPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		comandosPanel.setLayout(gbl_comandosPanel);
 		
-		JButton prevButton = new JButton("<<");
-		prevButton.addActionListener(new ActionListener() {
+		JButton prevFrameButton = new JButton("<");
+		GridBagConstraints gbc_prevFrameButton = new GridBagConstraints();
+		gbc_prevFrameButton.insets = new Insets(0, 0, 0, 5);
+		gbc_prevFrameButton.gridx = 7;
+		gbc_prevFrameButton.gridy = 0;
+		comandosPanel.add(prevFrameButton, gbc_prevFrameButton);
+		
+		JButton playButton = new JButton("play");
+		GridBagConstraints gbc_playButton = new GridBagConstraints();
+		gbc_playButton.insets = new Insets(0, 0, 0, 5);
+		gbc_playButton.gridx = 8;
+		gbc_playButton.gridy = 0;
+		comandosPanel.add(playButton, gbc_playButton);
+		
+		JButton nextFrameButton = new JButton(">");
+		nextFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				nextFrame();
 			}
 		});
-		
-		JButton nextButton = new JButton(">>");
-		GroupLayout gl_comandosPanel = new GroupLayout(comandosPanel);
-		gl_comandosPanel.setHorizontalGroup(
-			gl_comandosPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_comandosPanel.createSequentialGroup()
-					.addGap(101)
-					.addComponent(prevButton)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(nextButton)
-					.addContainerGap(205, Short.MAX_VALUE))
-		);
-		gl_comandosPanel.setVerticalGroup(
-			gl_comandosPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_comandosPanel.createSequentialGroup()
-					.addGroup(gl_comandosPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(prevButton)
-						.addComponent(nextButton))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		comandosPanel.setLayout(gl_comandosPanel);
-		
+		GridBagConstraints gbc_nextFrameButton = new GridBagConstraints();
+		gbc_nextFrameButton.gridx = 9;
+		gbc_nextFrameButton.gridy = 0;
+		comandosPanel.add(nextFrameButton, gbc_nextFrameButton);
+
 		videoPanel = new JPanel();
 		videoPanel.setBackground(Color.BLACK);
 		add(videoPanel, BorderLayout.CENTER);
 		videoPanel.setLayout(new BorderLayout(0, 0));
-		
-		java.awt.Component verticalStrut = Box.createVerticalStrut(20);
-		videoPanel.add(verticalStrut, BorderLayout.CENTER);
 	}
 
 	public String getVideoFile() {
@@ -107,47 +109,62 @@ public class VideoPanel extends JPanel {
 		this.videoFile = videoFile;
 		capture = new VideoCapture();
 		image = new Mat();
-		System.out.println("Abriendo video :"+capture.open(this.videoFile));
+		this.frameNum = 0;
+		this.maxFrame = 0;
+		boolean result = capture.open(this.videoFile);
+		PostProcessorApplication.setStatus("Abriendo video "+this.videoFile+": "+result);
+		if (result){
+			this.maxFrame = capture.get(7);
+		}
 	}
-	
-	private void showFrame(){
-		boolean result = capture.read(image);
-		System.out.println("Leyendo imagen: "+result);
-		if (result) {
-            ImageIcon img = new ImageIcon(Mat2BufferedImage(image));
-            videoPanel.removeAll();
-            videoPanel.add(new JLabel(img));
-            videoPanel.revalidate();
-            videoPanel.repaint();
-        }else
-        	System.err.println("No quiere");
-	}
-	
-	public static BufferedImage Mat2BufferedImage(Mat m){
-	    //source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
-	    //Fastest code
-	    //The output can be assigned either to a BufferedImage or to an Image
 
-	     int type = BufferedImage.TYPE_BYTE_GRAY;
-	     if ( m.channels() > 1 ) {
-	         type = BufferedImage.TYPE_3BYTE_BGR;
-	     }
-	     int bufferSize = m.channels()*m.cols()*m.rows();
-	     byte [] b = new byte[bufferSize];
-	     m.get(0,0,b); // get all the pixels
-	     BufferedImage image = new BufferedImage(m.cols(),m.rows(), type);
-	     final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-	     System.arraycopy(b, 0, targetPixels, 0, b.length);  
-	     return image;
-	    }
+	private void showFrame(){
+		boolean result = capture.set(1, frameNum);
+		result = result && capture.read(image);
+		PostProcessorApplication.setStatus("Leyendo imagen: "+result);
+		if (result) {
+			ImageIcon img = new ImageIcon(Mat2BufferedImage(image));
+			videoPanel.removeAll();
+			videoPanel.add(new JLabel(img));
+			videoPanel.revalidate();
+			videoPanel.repaint();
+		}else
+			PostProcessorApplication.setStatus("No se pudo leer imagen.");
+	}
+
+	private BufferedImage Mat2BufferedImage(Mat m){
+		//source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
+		//Fastest code
+		//The output can be assigned either to a BufferedImage or to an Image
+
+		int type = BufferedImage.TYPE_BYTE_GRAY;
+		if ( m.channels() > 1 ) {
+			type = BufferedImage.TYPE_3BYTE_BGR;
+		}
+		int bufferSize = m.channels()*m.cols()*m.rows();
+		byte [] b = new byte[bufferSize];
+		m.get(0,0,b); // get all the pixels
+		BufferedImage image = new BufferedImage(m.cols(),m.rows(), type);
+		final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+		System.arraycopy(b, 0, targetPixels, 0, b.length);  
+		return image;
+	}
 
 	public double getFrameNum() {
 		return frameNum;
 	}
 
+	private void nextFrame(){
+		if (this.frameNum < this.maxFrame){
+			this.frameNum++;
+			showFrame();
+		}
+	}
+	
 	public void setFrameNum(double frameNum) {
-		this.frameNum = frameNum;
-		System.out.println("Seteando frameNum: "+capture.set(1, frameNum));
-		showFrame();
+		if (frameNum<this.maxFrame){
+			this.frameNum = frameNum;
+			showFrame();
+		}
 	}
 }

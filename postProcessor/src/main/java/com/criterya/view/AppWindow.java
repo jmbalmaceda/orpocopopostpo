@@ -12,6 +12,10 @@ import javax.swing.JMenuItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 @Component
 public class AppWindow {
@@ -21,6 +25,8 @@ public class AppWindow {
 	private LogsPanel logsPanel;
 	@Autowired
 	private RecorridosPanel recorridosPanel;
+	private JLabel statusLabel;
+	private JPanel centerPanel;
 
 	public void show(){
 		EventQueue.invokeLater(new Runnable() {
@@ -59,10 +65,10 @@ public class AppWindow {
 		mntmCargarLogs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logsPanel.loadLogs();
-				frame.getContentPane().removeAll();
-				frame.getContentPane().add(logsPanel, BorderLayout.CENTER);
-				frame.getContentPane().revalidate();
-				frame.getContentPane().repaint();
+				centerPanel.removeAll();
+				centerPanel.add(logsPanel, BorderLayout.CENTER);
+				centerPanel.revalidate();
+				centerPanel.repaint();
 			}
 		});
 		mnLogs.add(mntmCargarLogs);
@@ -73,10 +79,10 @@ public class AppWindow {
 		JMenuItem mntmCargarRecorridos = new JMenuItem("Cargar recorridos");
 		mntmCargarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.getContentPane().add(recorridosPanel, BorderLayout.CENTER);
-				frame.getContentPane().revalidate();
-				frame.getContentPane().repaint();
+				centerPanel.removeAll();
+				centerPanel.add(recorridosPanel, BorderLayout.CENTER);
+				centerPanel.revalidate();
+				centerPanel.repaint();
 			}
 		});
 		mnRecorridos.add(mntmCargarRecorridos);
@@ -92,6 +98,22 @@ public class AppWindow {
 		});
 		mnAplicacin.add(mntmSalir);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel statusPanel = new JPanel();
+		statusPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		frame.getContentPane().add(statusPanel, BorderLayout.SOUTH);
+		statusPanel.setLayout(new BorderLayout(0, 0));
+		
+		statusLabel = new JLabel();
+		statusLabel.setText("Listo.");
+		statusPanel.add(statusLabel);
+		
+		centerPanel = new JPanel();
+		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new BorderLayout(0, 0));
 	}
 
+	public void setStatus(String status){
+		statusLabel.setText(status);
+	}
 }

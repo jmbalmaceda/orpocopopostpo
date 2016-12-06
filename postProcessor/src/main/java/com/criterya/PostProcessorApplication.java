@@ -17,6 +17,10 @@ public class PostProcessorApplication {
 	public static ConfigurableApplicationContext getContext(){
 		return context;
 	}
+	
+	public static void setStatus(String status){
+		context.getBean(AppWindow.class).setStatus(status);
+	}
 
 	private static void cargarDB(){
 		/* Logs */
