@@ -24,7 +24,7 @@ public class Interaccion {
 	@Id
 	@GeneratedValue( strategy=GenerationType.AUTO)
 	private Integer id;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<Accion> acciones;
 	private Integer x;
 	private Integer y;

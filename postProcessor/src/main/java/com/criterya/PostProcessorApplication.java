@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.criterya.daos.AccionRepository;
 import com.criterya.daos.LogRepository;
 import com.criterya.model.Log;
 import com.criterya.view.AppWindow;;
@@ -39,6 +40,12 @@ public class PostProcessorApplication {
 		log1.setUltimoBlobIdLogAnterior(105600);
 		log1.setVideoRgb("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
 		logRepository.save(log1);
+		
+		/* Acciones */
+		AccionRepository accionRepository = context.getBean(AccionRepository.class);
+		accionRepository.getAccionCompra();
+		accionRepository.getAccionDevuelve();
+		accionRepository.getAccionToca();
 	}
 	
 	

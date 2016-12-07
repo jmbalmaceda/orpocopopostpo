@@ -6,16 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
+
+import com.criterya.PostProcessorApplication;
 
 @Component
 public class AppWindow {
@@ -23,8 +25,6 @@ public class AppWindow {
 	private JFrame frame;
 	@Autowired
 	private LogsPanel logsPanel;
-	@Autowired
-	private RecorridosPanel recorridosPanel;
 	private JLabel statusLabel;
 	private JPanel centerPanel;
 
@@ -80,7 +80,7 @@ public class AppWindow {
 		mntmCargarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				centerPanel.removeAll();
-				centerPanel.add(recorridosPanel, BorderLayout.CENTER);
+				centerPanel.add(PostProcessorApplication.getContext().getBean(RecorridosPanel.class), BorderLayout.CENTER);
 				centerPanel.revalidate();
 				centerPanel.repaint();
 			}

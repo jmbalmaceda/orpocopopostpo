@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
@@ -25,8 +27,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import com.criterya.PostProcessorApplication;
@@ -36,10 +42,8 @@ import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Accion;
 import com.criterya.model.Interaccion;
 import com.criterya.model.Recorrido;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 @Component
+@Lazy
 public class RecorridosPanel extends JPanel {
 	/**
 	 * 
@@ -55,12 +59,14 @@ public class RecorridosPanel extends JPanel {
 	private JSpinner spinnerHasta;
 	private DefaultComboBoxModel<Recorrido> modelRecorridos;
 	private Recorrido recorridoSeleccionado;
+	private Interaccion interaccionSeleccionada;
 	private Date dateFrom;
 	private Date dateTo;
 	private JPanel videoPanel;
 	private JList<Interaccion> listInteracciones;
 	private JTable accionesTable;
 	private DefaultTableModel accionesTableModel;
+	private volatile boolean editandoAcciones = false;
 
 	/**
 	 * Create the panel.
@@ -186,6 +192,7 @@ public class RecorridosPanel extends JPanel {
 		topPanel.setLayout(gl_topPanel);
 
 		JSplitPane panel = new JSplitPane();
+		panel.setResizeWeight(0.5);
 		panel.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(panel, BorderLayout.WEST);
 
@@ -197,29 +204,30 @@ public class RecorridosPanel extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()){
 					recorridoSeleccionado = (Recorrido) listRecorridos.getSelectedValue();
+					if (recorridoSeleccionado!=null){
+						// Info del recorrido
+						/*
+						RecorridoPanel infoPanel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
+						infoPanel.setRecorrido(recorridoSeleccionado);
+						 */
 
-					// Info del recorrido
-					/*
-					RecorridoPanel infoPanel = PostProcessorApplication.getContext().getBean(RecorridoPanel.class);
-					infoPanel.setRecorrido(recorridoSeleccionado);
-					 */
+						// Interacciones del recorrido
+						recorridoSeleccionado = recorridoRepository.loadInteracciones(recorridoSeleccionado);
+						List<Interaccion> interacciones = recorridoSeleccionado.getInteracciones();
+						DefaultComboBoxModel<Interaccion> model = new DefaultComboBoxModel<>();
+						for (Interaccion interaccion : interacciones) {
+							model.addElement(interaccion);
+						}
+						listInteracciones.setModel(model);
 
-					// Interacciones del recorrido
-					recorridoSeleccionado = recorridoRepository.loadInteracciones(recorridoSeleccionado);
-					List<Interaccion> interacciones = recorridoSeleccionado.getInteracciones();
-					DefaultComboBoxModel<Interaccion> model = new DefaultComboBoxModel<>();
-					for (Interaccion interaccion : interacciones) {
-						model.addElement(interaccion);
+						// Video del recorrido
+						VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+						videoPanelBean.setVideoFile("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
+						videoPanelBean.setFrameNum(recorridoSeleccionado.getFrameEntrada());
+						videoPanel.add(videoPanelBean);
+						videoPanel.revalidate();
+						videoPanel.repaint();
 					}
-					listInteracciones.setModel(model);
-
-					// Video del recorrido
-					VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
-					videoPanelBean.setVideoFile("D:\\Videos_SantaRosa\\VideoRGB2016-9-1___9-0.avi");
-					videoPanelBean.setFrameNum(recorridoSeleccionado.getFrameEntrada());
-					videoPanel.add(videoPanelBean);
-					videoPanel.revalidate();
-					videoPanel.repaint();
 				}
 			}
 		});
@@ -227,6 +235,7 @@ public class RecorridosPanel extends JPanel {
 		scrollPane.setViewportView(listRecorridos);
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.5);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panel.setRightComponent(splitPane);
 
@@ -237,7 +246,7 @@ public class RecorridosPanel extends JPanel {
 		listInteracciones.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()){
-					Interaccion interaccionSeleccionada = listInteracciones.getSelectedValue();
+					interaccionSeleccionada = listInteracciones.getSelectedValue();
 					if (interaccionSeleccionada!=null){
 						VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
 						videoPanelBean.setFrameNum(interaccionSeleccionada.getFrame());
@@ -245,6 +254,7 @@ public class RecorridosPanel extends JPanel {
 						interaccionSeleccionada = interaccionRepository.loadAcciones(interaccionSeleccionada);
 						List<Accion> acciones = interaccionSeleccionada.getAcciones();
 						int rowCount = accionesTableModel.getRowCount();
+						editandoAcciones = true;
 						for (int i=0; i<rowCount; i++){
 							String nombreAccion = (String) accionesTableModel.getValueAt(i, 0);
 							boolean accionRealizada = false;
@@ -258,7 +268,8 @@ public class RecorridosPanel extends JPanel {
 							if (!accionRealizada)
 								accionesTableModel.setValueAt(Boolean.FALSE, i, 1);
 						}
-						accionesTableModel.fireTableDataChanged();
+						editandoAcciones = false;
+						//accionesTableModel.fireTableDataChanged();
 					}
 				}
 			}
@@ -277,20 +288,50 @@ public class RecorridosPanel extends JPanel {
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, Boolean.class
+				String.class, Boolean.class
 			};
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+					false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		};
+		accionesTableModel.addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if (!editandoAcciones && interaccionSeleccionada!=null){
+					int row = e.getFirstRow();
+					int column = e.getColumn();
+					if (column==1){ // Sólo se puede editar la segunda columna
+						String accion = (String) accionesTable.getValueAt(row, 0); 
+						Boolean value = (Boolean) accionesTable.getValueAt(row, 1);
+						if (value){
+							interaccionRepository.agregarAccion(interaccionSeleccionada, accion);
+						}else{
+							interaccionRepository.quitarAccion(interaccionSeleccionada, accion);
+						}
+					}
+				}
+			}
+		});
+		accionesTable.setModel(accionesTableModel);
+		scrollPane_2.setViewportView(accionesTable);
+	}
+
+	@PostConstruct
+	private void init(){
+		System.out.println("Init");
 		// Cargo todas las acciones posibles
 		List<Accion> acciones = accionRepository.findAll();
 		for (Accion accion : acciones) {
 			accionesTableModel.addRow(new Object[]{accion.getNombre(), Boolean.FALSE});
 		}
-		accionesTable.setModel(accionesTableModel);
-		scrollPane_2.setViewportView(accionesTable);
 	}
 
 	public void loadRecorridos(Date dateFrom, Date dateTo) {

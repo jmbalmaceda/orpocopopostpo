@@ -34,7 +34,7 @@ public class Recorrido {
 	private Date horarioSalida;
 	private Integer frameSalida;
 	private Integer duracion;
-	@OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Interaccion> interacciones;
 	private String sexo;
 	private Integer edad;
