@@ -32,7 +32,8 @@ public class Interaccion {
 	@ManyToOne
 	private Zona zona;
 	private Date horario;
-	private Integer frame;
+	private Integer frameInicio;
+	private Integer frameFin;
 	
 	
 	
@@ -78,14 +79,20 @@ public class Interaccion {
 	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
-	public Integer getFrame() {
-		return frame;
+	public Integer getFrameInicio() {
+		return frameInicio;
 	}
-	public void setFrame(Integer frame) {
-		this.frame = frame;
+	public void setFrameInicio(Integer frame) {
+		this.frameInicio = frame;
 	}
 	@Override
 	public String toString() {
-		return PostProcessorCommons.horaFormatter.format(horario)+ " - "+frame;
+		return PostProcessorCommons.horaFormatter.format(horario)+ " - "+frameInicio+"-"+frameFin;
+	}
+	public Integer getFrameFin() {
+		return frameFin;
+	}
+	public void setFrameFin(Integer frameFin) {
+		this.frameFin = frameFin;
 	}
 }

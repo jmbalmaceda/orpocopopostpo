@@ -25,8 +25,10 @@ import org.springframework.stereotype.Component;
 import com.criterya.PostProcessorCommons;
 import com.criterya.daos.LogRepository;
 import com.criterya.daos.RecorridoRepository;
+import com.criterya.daos.VideoRepository;
 import com.criterya.model.Log;
 import com.criterya.model.Recorrido;
+import com.criterya.model.Video;
 
 import javax.swing.JButton;
 
@@ -41,6 +43,8 @@ public class LogsPanel extends JPanel {
 	private LogRepository logRepository;
 	@Autowired
 	private RecorridoRepository recorridoRepository;
+	@Autowired
+	private VideoRepository videoRepository;
 
 	private JList<Log> list;
 	private JTextField tfId;
@@ -129,7 +133,16 @@ public class LogsPanel extends JPanel {
 				if (selectedLog!=null){
 					Integer firstId = logRepository.getPrimerBlobId(selectedLog);
 					Integer lastId = logRepository.getUltimoBlobId(selectedLog);
-					List<Recorrido> recorridos = recorridoRepository.getRecorridos(firstId, lastId, null);
+					Video video = videoRepository.findByPath(selectedLog.getVideoRgb());
+					if (video == null){
+						video = new Video();
+						video.setFechaInicio(selectedLog.getFecha());
+						video.setPath(selectedLog.getVideoRgb());
+						video.setUbicacion(selectedLog.getUbicacionVideo());
+						video.setNombre(selectedLog.getNombreVideo());
+						video = videoRepository.save(video);
+					}
+					List<Recorrido> recorridos = recorridoRepository.getRecorridos(firstId, lastId, video);
 					recorridoRepository.save(recorridos);
 				}
 			}

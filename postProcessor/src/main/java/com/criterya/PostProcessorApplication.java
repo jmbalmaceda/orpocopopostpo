@@ -51,7 +51,7 @@ public class PostProcessorApplication {
 	
 	public static void main(String[] args) {
 		context = new SpringApplicationBuilder(PostProcessorApplication.class).headless(false).run(args);
-		cargarDB();
+		//cargarDB();
 		AppWindow app = context.getBean(AppWindow.class);
 		app.show();
 	}

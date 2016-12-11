@@ -27,7 +27,7 @@ public class Recorrido {
 	private Integer idPerson;
 	private String sentidoEntrada;
 	private String sentidoSalida;
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Video video;
 	private Date horarioEntrada;
 	private Integer frameEntrada;
@@ -39,6 +39,8 @@ public class Recorrido {
 	private String sexo;
 	private Integer edad;
 	private Integer altura;
+	private Integer x;
+	private Integer y;
 	
 	public Integer getEdad() {
 		return edad;
@@ -126,6 +128,18 @@ public class Recorrido {
 	}
 	@Override
 	public String toString() {
-		return horarioEntrada+" - "+duracion;
+		return horarioEntrada+" - [ "+frameEntrada+" - "+frameSalida+" ]";
+	}
+	public Integer getX() {
+		return x;
+	}
+	public void setX(Integer x) {
+		this.x = x;
+	}
+	public Integer getY() {
+		return y;
+	}
+	public void setY(Integer y) {
+		this.y = y;
 	}
 }

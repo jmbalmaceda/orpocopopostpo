@@ -60,6 +60,8 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			recorrido.setSentidoEntrada(PostProcessorCommons.IZQUIERDA);
 		else
 			recorrido.setSentidoEntrada(PostProcessorCommons.DERECHA);
+		recorrido.setX(blobs.get(0).getBlob_x());
+		recorrido.setY(blobs.get(0).getBlob_y());
 		
 		/* Calcular salida de la persona */
 		int salidaIzq = 0;
@@ -100,7 +102,11 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 						acciones.add(accion);
 						// Agregar la interacción
 						Interaccion interaccion = new Interaccion();
-						interaccion.setFrame(blobsEnGondola.get(0).getFrame());
+						Blob primerBlob = blobsEnGondola.get(0);
+						interaccion.setFrameInicio(primerBlob.getFrame());
+						interaccion.setX(primerBlob.getBlob_x());
+						interaccion.setY(primerBlob.getBlob_y());
+						interaccion.setFrameFin(blobsEnGondola.get(blobsEnGondola.size()-1).getFrame());
 						interaccion.setAcciones(acciones);
 						interaccion.setHorario(blobsEnGondola.get(0).getCurrent_time());
 						interacciones.add(interaccion);

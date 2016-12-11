@@ -17,6 +17,8 @@ public class Video {
 	private Date fechaInicio;
 	private String ubicacion;
 	private String nombre;
+	private String path;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -40,6 +42,12 @@ public class Video {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	
