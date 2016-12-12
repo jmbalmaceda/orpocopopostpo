@@ -48,6 +48,8 @@ public class VideoPanel extends JPanel {
 	private boolean hasHandXY = false;
 	private Integer handY;
 	private Integer handX;
+	private int xClicked;
+	private int yClicked;
 
 	static{
 		try {
@@ -155,11 +157,12 @@ public class VideoPanel extends JPanel {
 
 		videoPanel = new JPanel();
 		videoPanel.addMouseListener(new MouseAdapter() {
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-				coordenadasLbl.setText("("+x+", "+y+")");
+				xClicked = e.getX();
+				yClicked = e.getY();
+				coordenadasLbl.setText("("+xClicked+", "+yClicked+")");
 			}
 		});
 		videoPanel.setBackground(Color.BLACK);
@@ -270,5 +273,13 @@ public class VideoPanel extends JPanel {
 
 	public void setLastFrameToPlay(double lastFrameToPlay) {
 		this.lastFrameToPlay = lastFrameToPlay;
+	}
+
+	public int getxClicked() {
+		return xClicked;
+	}
+
+	public int getyClicked() {
+		return yClicked;
 	}
 }

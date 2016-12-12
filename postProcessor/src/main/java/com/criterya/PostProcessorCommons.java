@@ -11,8 +11,12 @@ public class PostProcessorCommons {
 	 * Cantidad mínima de cuadros que deben existir para que se considere contacto con la góndola
 	 */
 	public static final int MIN_COUNT_OF_BLOBS_PICKUP = 3;
+	
 	public static final String IZQUIERDA = "Izquierda";
 	public static final String DERECHA = "Derecha";
+	
+	public static final String HOMBRE = "Hombre";
+	public static final String MUJER = "Mujer";
 	
 	public static final String ACCION_TOCA = "toca";
 	public static final String DESCRIPCION_ACCION_TOCA = "El cliente introduce su mano dentro de la góndola";

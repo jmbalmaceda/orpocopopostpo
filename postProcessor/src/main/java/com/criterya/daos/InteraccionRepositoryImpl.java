@@ -1,5 +1,6 @@
 package com.criterya.daos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,15 +19,20 @@ public class InteraccionRepositoryImpl implements InteraccionRepositoryCustom {
 	private EntityManager entityManager;
 	@Autowired
 	private InteraccionRepository interaccionRepository;
-	
+
 	@Override
 	public Interaccion loadAcciones(Interaccion interaccion) {
-		EntityGraph<Interaccion> graph = this.entityManager.createEntityGraph(Interaccion.class);
-		graph.addAttributeNodes("acciones");
-		Map<String, Object> hints = new HashMap<String, Object>();
-		hints.put("javax.persistence.loadgraph", graph);
-		Interaccion salida = this.entityManager.find(Interaccion.class, interaccion.getId(), hints);
-		return salida;
+		if (interaccion.getId()!=null){
+			EntityGraph<Interaccion> graph = this.entityManager.createEntityGraph(Interaccion.class);
+			graph.addAttributeNodes("acciones");
+			Map<String, Object> hints = new HashMap<String, Object>();
+			hints.put("javax.persistence.loadgraph", graph);
+			Interaccion salida = this.entityManager.find(Interaccion.class, interaccion.getId(), hints);
+			return salida;
+		}
+		if (interaccion.getAcciones()==null)
+			interaccion.setAcciones(new ArrayList<Accion>());
+		return interaccion;
 	}
 
 	@Override

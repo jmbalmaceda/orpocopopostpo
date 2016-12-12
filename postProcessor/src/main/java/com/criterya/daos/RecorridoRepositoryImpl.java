@@ -22,12 +22,12 @@ import com.criterya.model.Video;
 public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Autowired
 	private BlobRepository blobRepository;
 	@Autowired
 	private AccionRepository accionRepository;
-	
+
 	private Recorrido getRecorrido(Integer idPerson, Integer firstBlobId, Integer lastBlobId, Video video){
 		List<Blob> blobs = blobRepository.getBlobs(idPerson, firstBlobId, lastBlobId);
 		if (blobs==null || blobs.isEmpty())
@@ -42,6 +42,8 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 		recorrido.setHorarioEntrada(firstBlob.getCurrent_time());
 		recorrido.setHorarioSalida(lastBlob.getCurrent_time());
 		recorrido.setIdPerson(idPerson);
+		recorrido.setSexo(PostProcessorCommons.MUJER);
+		recorrido.setEdad(40);
 		recorrido.setVideo(video);
 		List<Interaccion> interacciones = new ArrayList<>();
 		recorrido.setInteracciones(interacciones );
@@ -62,7 +64,7 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			recorrido.setSentidoEntrada(PostProcessorCommons.DERECHA);
 		recorrido.setX(blobs.get(0).getBlob_x());
 		recorrido.setY(blobs.get(0).getBlob_y());
-		
+
 		/* Calcular salida de la persona */
 		int salidaIzq = 0;
 		int salidaDer = 0;
@@ -78,7 +80,7 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			recorrido.setSentidoSalida(PostProcessorCommons.DERECHA);
 		else
 			recorrido.setSentidoSalida(PostProcessorCommons.IZQUIERDA);
-		
+
 		/* Calcular promedio de los DEPTH */
 		/* Calcular las interacciones con la góndola */
 		Integer sumaAlturas = 0;
@@ -116,10 +118,10 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 			}
 		}
 		recorrido.setAltura(sumaAlturas/blobs.size());
-		
+
 		return recorrido ;
 	}
-	
+
 	@Override
 	public List<Recorrido> getRecorridos(Integer firstId, Integer lastId, Video video) {
 		List<Recorrido> recorridos = new ArrayList<>();
@@ -135,23 +137,27 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 
 	@Override
 	public List<Recorrido> getRecorridos(Date dateFrom, Date dateTo) {
-		List<Recorrido> salida = entityManager.createQuery("FROM Recorrido WHERE horarioEntrada BETWEEN :dateFrom AND :dateTo", Recorrido.class)
-			.setParameter("dateFrom", dateFrom)
-			.setParameter("dateTo", dateTo)
-			.getResultList();
+		List<Recorrido> salida = entityManager.createQuery("FROM Recorrido r WHERE r.horarioEntrada BETWEEN :dateFrom AND :dateTo ORDER BY r.horarioEntrada", Recorrido.class)
+				.setParameter("dateFrom", dateFrom)
+				.setParameter("dateTo", dateTo)
+				.getResultList();
 		return salida;
 	}
 
 	@Override
 	public Recorrido loadInteracciones(Recorrido recorridoSeleccionado) {
-		EntityGraph<Recorrido> graph = this.entityManager.createEntityGraph(Recorrido.class);
-		graph.addAttributeNodes("interacciones");
-		    
-		Map<String, Object> hints = new HashMap<String, Object>();
-		hints.put("javax.persistence.loadgraph", graph);
-		  
-		Recorrido salida = this.entityManager.find(Recorrido.class, recorridoSeleccionado.getId(), hints);
-		return salida;
+		if (recorridoSeleccionado.getId()!=null){
+			EntityGraph<Recorrido> graph = this.entityManager.createEntityGraph(Recorrido.class);
+			graph.addAttributeNodes("interacciones");
+			Map<String, Object> hints = new HashMap<String, Object>();
+			hints.put("javax.persistence.loadgraph", graph);
+			Recorrido salida = this.entityManager.find(Recorrido.class, recorridoSeleccionado.getId(), hints);
+			return salida;
+		}
+		if (recorridoSeleccionado.getInteracciones()==null){
+			recorridoSeleccionado.setInteracciones(new ArrayList<Interaccion>());
+		}
+		return recorridoSeleccionado;
 	}
 
 }

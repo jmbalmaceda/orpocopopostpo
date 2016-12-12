@@ -15,7 +15,7 @@ public class BlobRepositoryImpl implements BlobRepositoryCustom {
 
 	public List<Integer> getPeopleId(Integer firstId, Integer lastId){
 		List<Integer> salida = entityManager.createQuery("SELECT p.idPerson FROM Blob p WHERE p.id>=:firstId and p.id<=:lastId GROUP BY p.idPerson HAVING COUNT(p)>:countMin "
-				//+"ORDER BY p.id ASC"
+				+"ORDER BY p.id ASC"
 				, Integer.class)
 				.setParameter("firstId", firstId)
 				.setParameter("lastId", lastId)
