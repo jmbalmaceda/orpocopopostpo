@@ -29,14 +29,18 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 @Component
 public class VideoPanel extends JPanel {
 	private static final long serialVersionUID = 6984235223569864264L;
 	private String videoFile;
-	private double frameNum = 0;
-	private double maxFrame = 0;
-	private double lastFrameToPlay = 0;
+	double frameNum = 0;
+	double maxFrame = 0;
+	double lastFrameToPlay = 0;
 	private JPanel videoPanel;
 	private VideoCapture capture;
 	private boolean hasXY = false;
@@ -50,6 +54,7 @@ public class VideoPanel extends JPanel {
 	private Integer handX;
 	private int xClicked;
 	private int yClicked;
+	private PlayerThread playThread;
 
 	static{
 		try {
@@ -81,9 +86,9 @@ public class VideoPanel extends JPanel {
 		JPanel comandosPanel = new JPanel();
 		add(comandosPanel, BorderLayout.SOUTH);
 		GridBagLayout gbl_comandosPanel = new GridBagLayout();
-		gbl_comandosPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 0};
+		gbl_comandosPanel.columnWidths = new int[]{0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_comandosPanel.rowHeights = new int[]{0, 0};
-		gbl_comandosPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_comandosPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_comandosPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		comandosPanel.setLayout(gbl_comandosPanel);
 
@@ -93,65 +98,112 @@ public class VideoPanel extends JPanel {
 				prevFrame();
 			}
 		});
-		
+
 		coordenadasLbl = new JLabel("(0,0)");
 		GridBagConstraints gbc_coordenadasLbl = new GridBagConstraints();
 		gbc_coordenadasLbl.insets = new Insets(0, 0, 0, 5);
 		gbc_coordenadasLbl.gridx = 0;
 		gbc_coordenadasLbl.gridy = 0;
 		comandosPanel.add(coordenadasLbl, gbc_coordenadasLbl);
+
+		JButton button = new JButton("<<");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				prevFrame(10);
+			}
+		});
+		
+		final JSpinner spinner = new JSpinner();
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				double newValue = ((Number)spinner.getValue()).doubleValue();
+				if (newValue!=frameNum){
+					frameNum = newValue;
+					showFrame();
+				}
+			}
+		});
+		spinner.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
+		GridBagConstraints gbc_spinner = new GridBagConstraints();
+		gbc_spinner.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spinner.gridwidth = 2;
+		gbc_spinner.insets = new Insets(0, 0, 0, 5);
+		gbc_spinner.gridx = 1;
+		gbc_spinner.gridy = 0;
+		comandosPanel.add(spinner, gbc_spinner);
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 0, 0, 5);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 0;
+		comandosPanel.add(button, gbc_button);
 		GridBagConstraints gbc_prevFrameButton = new GridBagConstraints();
 		gbc_prevFrameButton.insets = new Insets(0, 0, 0, 5);
-		gbc_prevFrameButton.gridx = 7;
+		gbc_prevFrameButton.gridx = 4;
 		gbc_prevFrameButton.gridy = 0;
 		comandosPanel.add(prevFrameButton, gbc_prevFrameButton);
 
 		JButton playButton = new JButton("play");
 		playButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Thread playThread = new Thread(){
-					@Override
-					public void run() {
-						boolean continuar = true;
-						do{
-						if (frameNum < lastFrameToPlay){
-							nextFrame();
-							try {
-								sleep(((Number)sleepSpinner.getValue()).longValue());
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-						}else
-							continuar = false;
-						} while(continuar);
-					}
-				};
-				playThread.start();
+				if (playThread==null || !playThread.isPlaying())
+					playThread = new PlayerThread(VideoPanel.this);
+					playThread.start();
 			}
 		});
 		GridBagConstraints gbc_playButton = new GridBagConstraints();
 		gbc_playButton.insets = new Insets(0, 0, 0, 5);
-		gbc_playButton.gridx = 8;
+		gbc_playButton.gridx = 5;
 		gbc_playButton.gridy = 0;
 		comandosPanel.add(playButton, gbc_playButton);
-
-		JButton nextFrameButton = new JButton(">");
-		nextFrameButton.addActionListener(new ActionListener() {
+		
+				JButton nextFrameButton = new JButton(">");
+				nextFrameButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						nextFrame();
+					}
+				});
+				
+				JButton btnStop = new JButton("stop");
+				btnStop.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						playThread.stopPlay();
+					}
+				});
+				GridBagConstraints gbc_btnStop = new GridBagConstraints();
+				gbc_btnStop.insets = new Insets(0, 0, 0, 5);
+				gbc_btnStop.gridx = 6;
+				gbc_btnStop.gridy = 0;
+				comandosPanel.add(btnStop, gbc_btnStop);
+				GridBagConstraints gbc_nextFrameButton = new GridBagConstraints();
+				gbc_nextFrameButton.insets = new Insets(0, 0, 0, 5);
+				gbc_nextFrameButton.gridx = 7;
+				gbc_nextFrameButton.gridy = 0;
+				comandosPanel.add(nextFrameButton, gbc_nextFrameButton);
+		
+		JButton button_1 = new JButton(">>");
+		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				nextFrame();
+				nextFrame(10);
 			}
 		});
-		GridBagConstraints gbc_nextFrameButton = new GridBagConstraints();
-		gbc_nextFrameButton.insets = new Insets(0, 0, 0, 5);
-		gbc_nextFrameButton.gridx = 9;
-		gbc_nextFrameButton.gridy = 0;
-		comandosPanel.add(nextFrameButton, gbc_nextFrameButton);
-		
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 0, 5);
+		gbc_button_1.gridx = 8;
+		gbc_button_1.gridy = 0;
+		comandosPanel.add(button_1, gbc_button_1);
+
+		JLabel lblDelayEntreFrames = new JLabel("Delay entre frames:");
+		GridBagConstraints gbc_lblDelayEntreFrames = new GridBagConstraints();
+		gbc_lblDelayEntreFrames.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDelayEntreFrames.gridx = 9;
+		gbc_lblDelayEntreFrames.gridy = 0;
+		comandosPanel.add(lblDelayEntreFrames, gbc_lblDelayEntreFrames);
+
 		sleepSpinner = new JSpinner();
 		sleepSpinner.setModel(new SpinnerNumberModel(20, 0, 500, 1));
 		GridBagConstraints gbc_sleepSpinner = new GridBagConstraints();
 		gbc_sleepSpinner.fill = GridBagConstraints.HORIZONTAL;
-		gbc_sleepSpinner.gridx = 12;
+		gbc_sleepSpinner.gridx = 10;
 		gbc_sleepSpinner.gridy = 0;
 		comandosPanel.add(sleepSpinner, gbc_sleepSpinner);
 
@@ -206,7 +258,7 @@ public class VideoPanel extends JPanel {
 					this.hasHandXY = false;
 				}
 			}
-			
+
 			ImageIcon img = new ImageIcon(bufImage);
 			videoPanel.removeAll();
 			videoPanel.add(new JLabel(img));
@@ -238,16 +290,28 @@ public class VideoPanel extends JPanel {
 		return frameNum;
 	}
 
-	private void nextFrame(){
+	void nextFrame(){
+		nextFrame(1);
+	}
+	
+	void nextFrame(int count){
 		if (this.frameNum < this.maxFrame){
-			this.frameNum++;
+			this.frameNum+=count;
+			if (this.frameNum>this.maxFrame)
+				this.frameNum = this.maxFrame;
 			showFrame();
 		}
 	}
 
 	private void prevFrame(){
+		prevFrame(1);
+	}
+
+	private void prevFrame(int count){
 		if (this.frameNum>0){
-			this.frameNum--;
+			this.frameNum-=count;
+			if (this.frameNum<0)
+				this.frameNum=0;
 			showFrame();
 		}
 	}
@@ -257,7 +321,7 @@ public class VideoPanel extends JPanel {
 		this.y = y;
 		this.hasXY = true;
 	}
-	
+
 	public void setHandXY(Integer x, Integer y){
 		this.handX = x;
 		this.handY = y;
@@ -281,5 +345,43 @@ public class VideoPanel extends JPanel {
 
 	public int getyClicked() {
 		return yClicked;
+	}
+
+	long getSleepTime(){
+		return ((Number)sleepSpinner.getValue()).longValue();
+	}
+}
+
+class PlayerThread extends Thread{
+
+	private VideoPanel vp;
+	private volatile boolean continuar = true;
+
+	public boolean isPlaying(){
+		return continuar;
+	}
+	
+	public PlayerThread(VideoPanel vp) {
+		this.vp = vp;
+	}
+
+	public void stopPlay(){
+		continuar = false;
+	}
+
+	@Override
+	public void run() {
+		this.continuar = true;
+		do{
+			if (vp.frameNum < vp.lastFrameToPlay){
+				vp.nextFrame();
+				try {
+					sleep(vp.getSleepTime());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}else
+				continuar = false;
+		} while(continuar);
 	}
 }

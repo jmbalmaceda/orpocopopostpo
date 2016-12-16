@@ -106,8 +106,8 @@ public class RecorridoRepositoryImpl implements RecorridoRepositoryCustom {
 						Interaccion interaccion = new Interaccion();
 						Blob primerBlob = blobsEnGondola.get(0);
 						interaccion.setFrameInicio(primerBlob.getFrame());
-						interaccion.setX(primerBlob.getBlob_x());
-						interaccion.setY(primerBlob.getBlob_y());
+						interaccion.setX(primerBlob.getBlob_hand_x());
+						interaccion.setY(primerBlob.getBlob_hand_y());
 						interaccion.setFrameFin(blobsEnGondola.get(blobsEnGondola.size()-1).getFrame());
 						interaccion.setAcciones(acciones);
 						interaccion.setHorario(blobsEnGondola.get(0).getCurrent_time());

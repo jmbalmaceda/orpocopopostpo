@@ -361,12 +361,32 @@ public class RecorridosPanel extends JPanel {
 		JLabel lblFrame = new JLabel("Frame:");
 		
 		JLabel lblFrame_1 = new JLabel("Frame:");
+		
+		JButton btnEntrada = new JButton("Entr.");
+		btnEntrada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+				entradaX.setValue(videoPanelBean.getxClicked());
+				entradaY.setValue(videoPanelBean.getyClicked());
+				entradaFrame.setValue(new Double(videoPanelBean.getFrameNum()).intValue());
+			}
+		});
+		btnEntrada.setToolTipText("Copiar frame y (X,Y) como datos de entrada.");
+		
+		JButton btnSali = new JButton("Sali.");
+		btnSali.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+				salidaFrame.setValue(new Double(videoPanelBean.getFrameNum()).intValue());
+			}
+		});
+		btnSali.setToolTipText("Copia frame como dato de salida.");
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
 		gl_panel_5.setHorizontalGroup(
 			gl_panel_5.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_5.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_5.createSequentialGroup()
 							.addComponent(btnGuardarRecorrido, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -393,14 +413,18 @@ public class RecorridosPanel extends JPanel {
 							.addComponent(edadSpinner, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(sexoComboBox, 0, 47, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_panel_5.createSequentialGroup()
+						.addGroup(gl_panel_5.createSequentialGroup()
 							.addComponent(lblFrame)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(entradaFrame, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_panel_5.createSequentialGroup()
+						.addGroup(gl_panel_5.createSequentialGroup()
 							.addComponent(lblFrame_1)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(salidaFrame, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
+							.addComponent(salidaFrame, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_panel_5.createSequentialGroup()
+							.addComponent(btnEntrada, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSali, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panel_5.setVerticalGroup(
@@ -434,7 +458,11 @@ public class RecorridosPanel extends JPanel {
 					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblY)
 						.addComponent(entradaY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(13)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEntrada)
+						.addComponent(btnSali))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblSalida)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(salidaHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
