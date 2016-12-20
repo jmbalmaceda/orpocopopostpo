@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -48,6 +49,7 @@ import com.criterya.daos.RecorridoRepository;
 import com.criterya.model.Accion;
 import com.criterya.model.Interaccion;
 import com.criterya.model.Recorrido;
+
 import java.awt.Font;
 @Component
 @Lazy
@@ -236,6 +238,8 @@ public class RecorridosPanel extends JPanel {
 					if (recorridoSeleccionado!=null){
 						showRecorridoInfo();
 					}
+					interaccionSeleccionada = null;
+					showInteraccionInfo();
 				}
 			}
 		});
@@ -357,12 +361,12 @@ public class RecorridosPanel extends JPanel {
 
 		sexoComboBox = new JComboBox<>();
 		sexoComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {PostProcessorCommons.HOMBRE, PostProcessorCommons.MUJER}));
-		
+
 		JLabel lblFrame = new JLabel("Frame:");
-		
+
 		JLabel lblFrame_1 = new JLabel("Frame:");
-		
-		JButton btnEntrada = new JButton("Entr.");
+
+		JButton btnEntrada = new JButton("Entrada");
 		btnEntrada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
@@ -372,8 +376,8 @@ public class RecorridosPanel extends JPanel {
 			}
 		});
 		btnEntrada.setToolTipText("Copiar frame y (X,Y) como datos de entrada.");
-		
-		JButton btnSali = new JButton("Sali.");
+
+		JButton btnSali = new JButton("Salida");
 		btnSali.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
@@ -383,97 +387,99 @@ public class RecorridosPanel extends JPanel {
 		btnSali.setToolTipText("Copia frame como dato de salida.");
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
 		gl_panel_5.setHorizontalGroup(
-			gl_panel_5.createParallelGroup(Alignment.TRAILING)
+				gl_panel_5.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_5.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(btnGuardarRecorrido, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addComponent(entradaHora, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addComponent(lblEntrada, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addComponent(entradaSentido, 0, 123, Short.MAX_VALUE)
-						.addComponent(lblSalida, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addComponent(salidaHora, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addComponent(salidaSentido, 0, 123, Short.MAX_VALUE)
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblY, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblX, Alignment.LEADING))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-								.addComponent(entradaY, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-								.addComponent(entradaX, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(lblEdad)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(edadSpinner, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(sexoComboBox, 0, 47, Short.MAX_VALUE))
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(lblFrame)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(entradaFrame, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(lblFrame_1)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(salidaFrame, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panel_5.createSequentialGroup()
-							.addComponent(btnEntrada, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSali, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_5.createSequentialGroup()
+										.addComponent(btnGuardarRecorrido, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+										.addComponent(entradaHora, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+										.addComponent(lblEntrada, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+										.addComponent(entradaSentido, 0, 138, Short.MAX_VALUE)
+										.addComponent(lblSalida, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+										.addComponent(salidaHora, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+										.addComponent(salidaSentido, 0, 138, Short.MAX_VALUE)
+										.addGroup(gl_panel_5.createSequentialGroup()
+												.addComponent(lblEdad)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(edadSpinner, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(sexoComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_panel_5.createSequentialGroup()
+														.addComponent(lblFrame)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(entradaFrame, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+														.addGroup(gl_panel_5.createSequentialGroup()
+																.addComponent(lblFrame_1)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(salidaFrame, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+																.addGroup(gl_panel_5.createSequentialGroup()
+																		.addComponent(lblX)
+																		.addPreferredGap(ComponentPlacement.RELATED)
+																		.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+																				.addGroup(gl_panel_5.createSequentialGroup()
+																						.addComponent(entradaX, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+																						.addGap(1)
+																						.addComponent(lblY, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+																						.addPreferredGap(ComponentPlacement.RELATED)
+																						.addComponent(entradaY, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+																						.addGroup(gl_panel_5.createSequentialGroup()
+																								.addGap(10)
+																								.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING, false)
+																										.addComponent(btnEntrada, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																										.addComponent(btnSali, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+																										.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)))))
+																										.addGap(0))
+				);
 		gl_panel_5.setVerticalGroup(
-			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				gl_panel_5.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_5.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton)
-						.addComponent(btnGuardarRecorrido, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblEdad)
-						.addComponent(edadSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(sexoComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblEntrada)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(entradaHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(entradaFrame, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblFrame))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(entradaSentido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblX)
-						.addComponent(entradaX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblY)
-						.addComponent(entradaY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEntrada)
-						.addComponent(btnSali))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblSalida)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(salidaHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
-						.addComponent(salidaFrame, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblFrame_1))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(salidaSentido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnNewButton_1)
+								.addComponent(btnNewButton)
+								.addComponent(btnGuardarRecorrido, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+								.addGap(12)
+								.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblEdad)
+										.addComponent(edadSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(sexoComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblEntrada)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(entradaHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+												.addComponent(entradaFrame, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblFrame))
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(entradaSentido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+														.addComponent(lblX)
+														.addComponent(entradaX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblY)
+														.addComponent(entradaY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnEntrada)
+														.addGap(3)
+														.addComponent(btnSali)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(lblSalida)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(salidaHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+																.addComponent(salidaFrame, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																.addComponent(lblFrame_1))
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(salidaSentido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
 		panel_5.setLayout(gl_panel_5);
 
 		JSplitPane splitPane_2 = new JSplitPane();
@@ -493,12 +499,12 @@ public class RecorridosPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//TODO: Nueva Interacción
 				if (recorridoSeleccionado!=null){
+					VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
 					interaccionSeleccionada = new Interaccion();
 					interaccionSeleccionada.setAcciones(new ArrayList<Accion>());
-					interaccionSeleccionada.setFrameInicio(recorridoSeleccionado.getFrameEntrada());
-					interaccionSeleccionada.setFrameFin(recorridoSeleccionado.getFrameSalida());
+					interaccionSeleccionada.setFrameInicio(new Double(videoPanelBean.getFrameNum()).intValue());
+					interaccionSeleccionada.setFrameFin(interaccionSeleccionada.getFrameInicio());
 					interaccionSeleccionada.setHorario(recorridoSeleccionado.getHorarioEntrada());
-					VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
 					interaccionSeleccionada.setX(videoPanelBean.getxClicked());
 					interaccionSeleccionada.setY(videoPanelBean.getyClicked());
 					interaccionSeleccionada.setZ(0);
@@ -546,53 +552,53 @@ public class RecorridosPanel extends JPanel {
 		button_2.setIcon(new ImageIcon(RecorridosPanel.class.getResource("/icons/save.png")));
 
 		interaccionFrameInicio = new JSpinner();
-		
+
 		JLabel lblInicio = new JLabel("Inicio:");
-		
+
 		JLabel lblFin = new JLabel("Fin:");
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
 		gl_panel_6.setHorizontalGroup(
-			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				gl_panel_6.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_6.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_6.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_6.createSequentialGroup()
-							.addGap(0, 0, Short.MAX_VALUE)
-							.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addComponent(interaccionHora, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-						.addGroup(gl_panel_6.createSequentialGroup()
-							.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblFin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblInicio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_6.createParallelGroup(Alignment.TRAILING)
-								.addComponent(interaccionFrameFin, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-								.addComponent(interaccionFrameInicio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_6.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(0, 0, Short.MAX_VALUE)
+										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(button, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+										.addComponent(interaccionHora, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+										.addGroup(gl_panel_6.createSequentialGroup()
+												.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(lblFin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(lblInicio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addGroup(gl_panel_6.createParallelGroup(Alignment.TRAILING)
+																.addComponent(interaccionFrameFin, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+																.addComponent(interaccionFrameInicio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))))
+																.addContainerGap())
+				);
 		gl_panel_6.setVerticalGroup(
-			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				gl_panel_6.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_6.createSequentialGroup()
-					.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(interaccionHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_6.createParallelGroup(Alignment.BASELINE)
-						.addComponent(interaccionFrameInicio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblInicio))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_6.createParallelGroup(Alignment.BASELINE)
-						.addComponent(interaccionFrameFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblFin))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING)
+								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(interaccionHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel_6.createParallelGroup(Alignment.BASELINE)
+										.addComponent(interaccionFrameInicio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblInicio))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel_6.createParallelGroup(Alignment.BASELINE)
+												.addComponent(interaccionFrameFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblFin))
+												.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
 		panel_6.setLayout(gl_panel_6);
 
 		JPanel panel_7 = new JPanel();
@@ -622,6 +628,7 @@ public class RecorridosPanel extends JPanel {
 
 		JPanel panel_9 = new JPanel();
 		panel_8.add(panel_9, BorderLayout.WEST);
+		panel_9.setLayout(new BorderLayout(0, 0));
 
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panel_9.add(scrollPane_2);
@@ -632,6 +639,38 @@ public class RecorridosPanel extends JPanel {
 
 		JPanel panel_10 = new JPanel();
 		panel_8.add(panel_10, BorderLayout.EAST);
+
+		JButton addActionBtn = new JButton("");
+		addActionBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//int result = JOptionPane.showConfirmDialog(RecorridosPanel.this, "Nombre de la acción", "Nueva acción", JOptionPane.OK_CANCEL_OPTION);
+				String newActionName = JOptionPane.showInputDialog("Nombre de la acción");
+				if (newActionName!=null){
+					Accion newAction = new Accion();
+					newAction.setNombre(newActionName);
+					newAction.setDescripcion(newActionName);
+					accionRepository.save(newAction);
+					showInteraccionInfo();
+				}
+
+			}
+		});
+		addActionBtn.setIcon(new ImageIcon(RecorridosPanel.class.getResource("/icons/add.png")));
+		GroupLayout gl_panel_10 = new GroupLayout(panel_10);
+		gl_panel_10.setHorizontalGroup(
+				gl_panel_10.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_10.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(addActionBtn)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+		gl_panel_10.setVerticalGroup(
+				gl_panel_10.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_10.createSequentialGroup()
+						.addComponent(addActionBtn)
+						.addContainerGap(55, Short.MAX_VALUE))
+				);
+		panel_10.setLayout(gl_panel_10);
 		initDataBindings();
 	}
 
@@ -693,34 +732,39 @@ public class RecorridosPanel extends JPanel {
 	}
 
 	private void showInteraccionInfo() {
-		/* Info Interacción */
-		interaccionHora.setValue(interaccionSeleccionada.getHorario());
-		interaccionFrameInicio.setValue(interaccionSeleccionada.getFrameInicio());
-		interaccionFrameFin.setValue(interaccionSeleccionada.getFrameFin());
-
-		VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
-		videoPanelBean.setXY(interaccionSeleccionada.getX(), interaccionSeleccionada.getX());
-		videoPanelBean.setFrameNum(interaccionSeleccionada.getFrameInicio());
-		videoPanelBean.setLastFrameToPlay(interaccionSeleccionada.getFrameFin());
-		// Actualizar las acciones realizadas en la interacción con la góndola
-		interaccionSeleccionada = interaccionRepository.loadAcciones(interaccionSeleccionada);
-		List<Accion> acciones = interaccionSeleccionada.getAcciones();
-		int rowCount = accionesTableModel.getRowCount();
+		/* limpiar acciones */
 		editandoAcciones = true;
+		int rowCount = accionesTableModel.getRowCount();
 		for (int i=0; i<rowCount; i++){
-			String nombreAccion = (String) accionesTableModel.getValueAt(i, 0);
-			boolean accionRealizada = false;
-			for (Accion accion: acciones){
-				if (accion.getNombre().equals(nombreAccion)){
-					accionesTableModel.setValueAt(Boolean.TRUE, i, 1);
-					accionRealizada = true;
-					break;
+			accionesTableModel.setValueAt(Boolean.FALSE, i, 1);
+		}
+
+		/* Info Interacción */
+		if (interaccionSeleccionada!=null){
+			interaccionHora.setValue(interaccionSeleccionada.getHorario());
+			interaccionFrameInicio.setValue(interaccionSeleccionada.getFrameInicio());
+			interaccionFrameFin.setValue(interaccionSeleccionada.getFrameFin());
+
+			VideoPanel videoPanelBean = PostProcessorApplication.getContext().getBean(VideoPanel.class);
+			videoPanelBean.setXY(interaccionSeleccionada.getX(), interaccionSeleccionada.getX());
+			videoPanelBean.setFrameNum(interaccionSeleccionada.getFrameInicio());
+			videoPanelBean.setLastFrameToPlay(interaccionSeleccionada.getFrameFin());
+			// Actualizar las acciones realizadas en la interacción con la góndola
+			interaccionSeleccionada = interaccionRepository.loadAcciones(interaccionSeleccionada);
+			List<Accion> acciones = interaccionSeleccionada.getAcciones();
+
+			for (int i=0; i<rowCount; i++){
+				String nombreAccion = (String) accionesTableModel.getValueAt(i, 0);
+				for (Accion accion: acciones){
+					if (accion.getNombre().equals(nombreAccion)){
+						accionesTableModel.setValueAt(Boolean.TRUE, i, 1);
+						break;
+					}
 				}
 			}
-			if (!accionRealizada)
-				accionesTableModel.setValueAt(Boolean.FALSE, i, 1);
 		}
 		editandoAcciones = false;
+
 	}
 
 	protected void initDataBindings() {
