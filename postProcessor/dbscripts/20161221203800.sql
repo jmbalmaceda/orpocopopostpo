@@ -68,11 +68,12 @@ CREATE TABLE `recorrido` (
   CONSTRAINT `FKt9tgqsmglrcnbyy42qpwmhajc` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `video` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_inicio` datetime DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `path` varchar(255) DEFAULT NULL,
-  `ubicacion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `recorrido_interacciones` (
+  `recorrido_id` int(11) NOT NULL,
+  `interacciones_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_8pk3pfo0m41i8fovuansdsc1d` (`interacciones_id`),
+  KEY `FK1vx2ojp3xx8fecypxbfulh70f` (`recorrido_id`),
+  CONSTRAINT `FK1vx2ojp3xx8fecypxbfulh70f` FOREIGN KEY (`recorrido_id`) REFERENCES `recorrido` (`id`),
+  CONSTRAINT `FKi3mu5oqovvew3mgcxuvxyggo5` FOREIGN KEY (`interacciones_id`) REFERENCES `interaccion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
