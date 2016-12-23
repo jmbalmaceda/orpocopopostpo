@@ -22,10 +22,13 @@ import javax.swing.ListSelectionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.criterya.PostProcessorApplication;
 import com.criterya.PostProcessorCommons;
+import com.criterya.daos.BlobRepository;
 import com.criterya.daos.LogRepository;
 import com.criterya.daos.RecorridoRepository;
 import com.criterya.daos.VideoRepository;
+import com.criterya.model.Blob;
 import com.criterya.model.Log;
 import com.criterya.model.Recorrido;
 import com.criterya.model.Video;
@@ -35,12 +38,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
+
 @Component
 public class LogsPanel extends JPanel {
 	private static final long serialVersionUID = 5870801492344409880L;
 
 	@Autowired
 	private LogRepository logRepository;
+	@Autowired
+	private BlobRepository blobRepository;
 	@Autowired
 	private RecorridoRepository recorridoRepository;
 	@Autowired
@@ -128,6 +135,7 @@ public class LogsPanel extends JPanel {
 		tfVideoDEPTH.setColumns(10);
 		
 		JButton btnGenerarRecorridos = new JButton("Generar Recorridos");
+		btnGenerarRecorridos.setIcon(new ImageIcon(LogsPanel.class.getResource("/icons/generate.png")));
 		btnGenerarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedLog!=null){
@@ -147,6 +155,24 @@ public class LogsPanel extends JPanel {
 				}
 			}
 		});
+		
+		JButton btnVer = new JButton("Ver");
+		btnVer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedLog!=null){
+					Integer firstId = logRepository.getPrimerBlobId(selectedLog);
+					Integer lastId = logRepository.getUltimoBlobId(selectedLog);
+					// TODO:
+					Blob firstBlob = blobRepository.getOne(firstId);
+					Blob lastBlob = blobRepository.getOne(lastId);
+					RecorridosPanel recorridosPanel = PostProcessorApplication.getContext().getBean(RecorridosPanel.class);
+					recorridosPanel.setPeriodo(firstBlob.getCurrent_time(), lastBlob.getCurrent_time());
+					AppWindow appWindow = PostProcessorApplication.getContext().getBean(AppWindow.class);
+					appWindow.showPanel(recorridosPanel);
+				}
+			}
+		});
+		btnVer.setIcon(new ImageIcon(LogsPanel.class.getResource("/icons/view.png")));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -166,7 +192,7 @@ public class LogsPanel extends JPanel {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tfPrimerBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(tfTexto, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+								.addComponent(tfTexto, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
 								.addComponent(tfHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 									.addComponent(tfDia, Alignment.LEADING)
@@ -178,9 +204,12 @@ public class LogsPanel extends JPanel {
 							.addGap(27)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tfUltimoBlobId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(tfVideoRGB)
-								.addComponent(tfVideoDEPTH)))
-						.addComponent(btnGenerarRecorridos))
+								.addComponent(tfVideoRGB, 186, 186, 186)
+								.addComponent(tfVideoDEPTH, 186, 186, 186)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnVer)
+							.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+							.addComponent(btnGenerarRecorridos)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -219,7 +248,9 @@ public class LogsPanel extends JPanel {
 						.addComponent(lblVideoDepth)
 						.addComponent(tfVideoDEPTH, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnGenerarRecorridos)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnVer)
+						.addComponent(btnGenerarRecorridos))
 					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);

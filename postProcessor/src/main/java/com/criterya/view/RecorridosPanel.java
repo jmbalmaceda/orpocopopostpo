@@ -340,6 +340,8 @@ public class RecorridosPanel extends JPanel {
 					recorridoSeleccionado.setHorarioSalida((Date) salidaHora.getValue());
 					recorridoSeleccionado.setFrameSalida(((Number)salidaFrame.getValue()).intValue());
 					recorridoSeleccionado.setSentidoSalida(salidaSentido.getSelectedItem().toString());
+					Integer duracion = Long.valueOf(recorridoSeleccionado.getHorarioSalida().getTime() - recorridoSeleccionado.getHorarioEntrada().getTime()).intValue();
+					recorridoSeleccionado.setDuracion(duracion);
 					recorridoSeleccionado = recorridoRepository.save(recorridoSeleccionado);
 					loadRecorridos(dateFrom, dateTo);
 				}
@@ -684,7 +686,7 @@ public class RecorridosPanel extends JPanel {
 		}
 	}
 
-	public void loadRecorridos(Date dateFrom, Date dateTo) {
+	private void loadRecorridos(Date dateFrom, Date dateTo) {
 		int oldIndexRecorridoSeleccionado = indexRecorridoSeleccionado;	// Guardo temporalmente el índice del recorrido seleccionado.
 		modelRecorridos.removeAllElements();
 		indexRecorridoSeleccionado = oldIndexRecorridoSeleccionado;		// Recupero el índice
@@ -765,6 +767,12 @@ public class RecorridosPanel extends JPanel {
 		}
 		editandoAcciones = false;
 
+	}
+	
+	public void setPeriodo(Date fechaDesde, Date fechaHasta){
+		spinnerDesde.setValue(fechaDesde);
+		spinnerHasta.setValue(fechaHasta);
+		loadRecorridos(fechaDesde, fechaHasta);
 	}
 
 	protected void initDataBindings() {

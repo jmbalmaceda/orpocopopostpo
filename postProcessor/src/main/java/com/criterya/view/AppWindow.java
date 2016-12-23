@@ -65,10 +65,7 @@ public class AppWindow {
 		mntmCargarLogs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logsPanel.loadLogs();
-				centerPanel.removeAll();
-				centerPanel.add(logsPanel, BorderLayout.CENTER);
-				centerPanel.revalidate();
-				centerPanel.repaint();
+				showPanel(logsPanel);
 			}
 		});
 		mnLogs.add(mntmCargarLogs);
@@ -79,10 +76,8 @@ public class AppWindow {
 		JMenuItem mntmCargarRecorridos = new JMenuItem("Cargar recorridos");
 		mntmCargarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				centerPanel.removeAll();
-				centerPanel.add(PostProcessorApplication.getContext().getBean(RecorridosPanel.class), BorderLayout.CENTER);
-				centerPanel.revalidate();
-				centerPanel.repaint();
+				RecorridosPanel panel = PostProcessorApplication.getContext().getBean(RecorridosPanel.class);
+				showPanel(panel);
 			}
 		});
 		mnRecorridos.add(mntmCargarRecorridos);
@@ -115,5 +110,12 @@ public class AppWindow {
 
 	public void setStatus(String status){
 		statusLabel.setText(status);
+	}
+	
+	public void showPanel(JPanel panel){
+		centerPanel.removeAll();
+		centerPanel.add(panel, BorderLayout.CENTER);
+		centerPanel.revalidate();
+		centerPanel.repaint();
 	}
 }
