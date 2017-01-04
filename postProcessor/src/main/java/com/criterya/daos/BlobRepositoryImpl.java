@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import com.criterya.PostProcessorCommons;
 import com.criterya.model.Blob;
@@ -49,6 +50,16 @@ public class BlobRepositoryImpl implements BlobRepositoryCustom {
 				.setParameter("firstBlobId", firstBlobId)
 				.setParameter("lastBlobId", lastBlobId)
 				.getResultList();
+		return salida;
+	}
+
+	@Override
+	@Transactional
+	public Blob getOneWithTime(Integer id) {
+		Blob salida = entityManager.createQuery("From Blob b WHERE b.id=:id", Blob.class)
+				.setParameter("id", id)
+				.getSingleResult();
+		salida.getCurrent_time();
 		return salida;
 	}
 }

@@ -163,8 +163,8 @@ public class LogsPanel extends JPanel {
 					Integer firstId = logRepository.getPrimerBlobId(selectedLog);
 					Integer lastId = logRepository.getUltimoBlobId(selectedLog);
 					// TODO:
-					Blob firstBlob = blobRepository.getOne(firstId);
-					Blob lastBlob = blobRepository.getOne(lastId);
+					Blob firstBlob = blobRepository.getOneWithTime(firstId);
+					Blob lastBlob = blobRepository.getOneWithTime(lastId);
 					RecorridosPanel recorridosPanel = PostProcessorApplication.getContext().getBean(RecorridosPanel.class);
 					recorridosPanel.setPeriodo(firstBlob.getCurrent_time(), lastBlob.getCurrent_time());
 					AppWindow appWindow = PostProcessorApplication.getContext().getBean(AppWindow.class);

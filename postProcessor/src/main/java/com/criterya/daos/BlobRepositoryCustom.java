@@ -9,4 +9,5 @@ public interface BlobRepositoryCustom {
 	List<Blob> getPickupByPeriodUsingId(Integer firstId, Integer lastId);
 	List<Blob> getPickupByPeriodUsingId(Integer firstId);
 	List<Blob> getBlobs(Integer idPerson, Integer firstBlobId, Integer lastBlobId);
+	Blob getOneWithTime(Integer id);
 }
