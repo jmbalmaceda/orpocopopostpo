@@ -1,0 +1,193 @@
+<html>
+	<head>
+		<script	src="js/jquery.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<script	src="js/bootstrap.min.js"></script>
+		<script src="js/highcharts/highcharts.js"></script>
+		<!--<script src="js/highcharts/highcharts-3d.js"></script>-->
+		
+		<link rel="stylesheet" href="style.css" />
+
+		<script src="dataFunChannel.js"></script>
+		
+		<script>
+			$(document).ready(function() { 
+				
+				<!-- FunChannel-->
+				var categories = ['Shopper', 'Interaction', 'Interested', 'Product Zone', 'Shelve Transit', 'Total Customer'];
+				$(document).ready(function () {
+					$('#funChannelDiv').highcharts({
+						chart: {
+							type: 'bar'
+						},
+						title: {
+							text: 'Orco'
+						},
+						subtitle: {
+							text: 'Criterya'
+						},
+						xAxis: [{
+							categories: categories,
+							reversed: false,
+							labels: {
+								step: 1
+							}
+						}, { // mirror axis on right side
+							opposite: true,
+							reversed: false,
+							categories: categories,
+							linkedTo: 0,
+							labels: {
+								step: 1
+							}
+						}],
+						yAxis: {
+							title: {
+								text: null
+							},
+							labels: {
+								formatter: function () {
+									return Math.abs(this.value);
+								}
+							}
+						},
+						  credits: {
+						  enabled: false
+						},
+						plotOptions: {
+							series: {
+								stacking: 'normal'
+							},
+							bar: {
+							  dataLabels: {
+								  enabled: true,
+								  formatter: function () {
+								return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+							}
+							  }
+						  }
+						},
+						tooltip: {
+							formatter: function () {
+								return '<b>' + this.series.name + ', ' + this.point.category + '</b><br/>' +
+									'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+							}
+						},
+
+						series: series
+					});
+				});
+				<!-- fin FanChannel -->
+				
+				
+				$(document).ready(function () {
+
+					var ranges = [
+							[Date.UTC(2017, 0,01,8),	123],
+							[Date.parse("01/01/2017 08:10"),	113],
+							[Date.parse("01/01/2017 08:20"),	728],
+							[Date.parse("01/01/2017 08:30"),	53],
+							[Date.parse("01/01/2017 08:40"),	338],
+							[Date.parse("01/01/2017 08:50"),	331],
+							[Date.parse("01/01/2017 09:00"),	211],
+							[Date.parse("01/01/2017 09:10"),	110],
+							[Date.parse("01/01/2017 09:20"),	91],
+							[Date.parse("01/01/2017 09:30"),	101]
+						],
+						averages = [
+							[Date.parse("01/01/2017 08:00"),	1213],
+							[Date.parse("01/01/2017 08:10"),	1113],
+							[Date.parse("01/01/2017 08:20"),	7218],
+							[Date.parse("01/01/2017 08:30"),	53],
+							[Date.parse("01/01/2017 08:40"),	338],
+							[Date.parse("01/01/2017 08:50"),	331],
+							[Date.parse("01/01/2017 09:00"),	211],
+							[Date.parse("01/01/2017 09:10"),	110],
+							[Date.parse("01/01/2017 09:20"),	91],
+							[Date.parse("01/01/2017 09:30"),	101]
+
+						];
+
+
+					Highcharts.chart('comprasPorDiaDiv', {
+						chart: {
+							zoomType: 'x'
+						},
+						title: {
+							text: 'July temperatures'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							}
+						},
+
+						tooltip: {
+							crosshairs: true,
+							shared: true,
+							valueSuffix: '°C'
+						},
+
+						legend: {
+						},
+
+						series: [{
+							name: 'Temperature',
+							data: averages,
+							type: 'area',
+							zIndex: 1,
+							marker: {
+								fillColor: 'white',
+								lineWidth: 2,
+								lineColor: Highcharts.getOptions().colors[0]
+							}
+						}, {
+							name: 'Range',
+							data: ranges,
+							type: 'column'
+						}]
+					});
+				});
+				
+			});
+		</script>
+		
+	</head>
+	
+
+	<body>
+			<ul id="tabs" class="nav nav-tabs" role="tablist">
+			  <li role="presentation" id="summary-tab" class="summary-tab active">
+				<a href="#summary-panel" aria-controls="settings" role="tab" data-toggle="tab">Fun Channel</a>
+			  </li>
+			  <li role="presentation" id="chart-tab" class="chart-tab">
+				<a href="#chart-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por día</a>
+			  </li>
+			</ul>
+
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane fade in active" id="summary-panel" class="summary-tab">
+					<div class="chart-container">
+						<div id="funChannelDiv"></div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="chart-panel" class="chart-tab">
+					<div class="chart-container">
+						<div id="comprasPorDiaDiv"></div>
+					</div>
+				</div>
+			</div>
+			<!--
+			<div id="comprasPorDiaDiv" style="min-width: 510px; max-width: 800px; height: 400px; margin: 0 auto" />
+			<div id="funChannelDiv" style="min-width: 510px; max-width: 800px; height: 400px; margin: 0 auto" />
+			-->
+	</body>
+</html>

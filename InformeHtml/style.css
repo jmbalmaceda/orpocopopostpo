@@ -1,0 +1,45 @@
+#tabs {
+  width: 100%;
+}
+#tabs li {
+  width: 25%;
+}
+.tab-pane {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.tab-pane.active {
+
+  background: white;
+  min-height: 600px;
+}
+.tab-pane .chart-title-wrapper {
+  text-align: center;
+}
+.highcharts-container {
+  width:100% !important;
+  height:100% !important;
+}
+.chart-container {
+  overflow: hidden;
+  background: white;
+  width: 100%;
+}
+#chart, #summarychart {
+    width: 100%;
+
+}
+
+.tab-content > .active,
+.pill-content > .active {
+    height: auto;      
+} 
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: block;     
+    height: 0;         
+    overflow-y: hidden; 
+}
