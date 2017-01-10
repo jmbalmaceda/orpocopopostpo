@@ -1,0 +1,3 @@
+/home/jmbalmaceda/Orco/ComprasXDia
+/home/jmbalmaceda/Orco/ComprasXHora
+/home/jmbalmaceda

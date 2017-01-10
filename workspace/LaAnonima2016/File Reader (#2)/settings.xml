@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
-<entry key="factory" type="xstring" value="org.knime.base.node.io.filereader.FileReaderNodeFactory"/>
-<entry key="node-name" type="xstring" value="File Reader"/>
-<entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
-<entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base"/>
-<entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
-<config key="factory_settings"/>
 <entry key="node_file" type="xstring" value="settings.xml"/>
 <config key="flow_stack"/>
 <config key="internal_node_subsettings">
@@ -52,7 +46,6 @@
 <entry key="CombineMultDelims" type="xboolean" value="false"/>
 <entry key="SkipFirstLines" type="xlong" value="0"/>
 <entry key="NewLineInQuotes" type="xboolean" value="false"/>
-<entry key="TableName" type="xstring" value="Copia%20de%20Carga%20de%20datos%20-%20La%20Anonima%20(Respuestas)%20-%20Respuestas%20de%20formulario%201.tsv"/>
 <entry key="hasColHdr" type="xboolean" value="true"/>
 <entry key="hasRowHdr" type="xboolean" value="false"/>
 <entry key="ignoreEmptyLines" type="xboolean" value="true"/>
@@ -64,6 +57,7 @@
 <entry key="SkipEmptyLine1" type="xboolean" value="true"/>
 </config>
 <config key="MissingPatterns"/>
+<config key="FormatParameter"/>
 <entry key="globalMissPattern" type="xstring" isnull="true" value=""/>
 <entry key="DecimalSeparator" type="xchar" value="."/>
 <entry key="ThrousandsSeparator" type="xchar" value="%%00000"/>
@@ -75,11 +69,11 @@
 <entry key="CharsetName" type="xstring" isnull="true" value=""/>
 <entry key="delimsAtEOLuserVal" type="xboolean" value="false"/>
 <entry key="numOfColumns" type="xint" value="16"/>
-<entry key="PreserveSettings" type="xboolean" value="false"/>
 <config key="ColumnProperties">
 <config key="0">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Marca temporal"/>
@@ -91,6 +85,7 @@
 <config key="1">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Fecha"/>
@@ -102,6 +97,7 @@
 <config key="2">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Hora"/>
@@ -113,6 +109,7 @@
 <config key="3">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Genero / Sexo"/>
@@ -124,6 +121,7 @@
 <config key="4">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" isnull="true" value=""/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Edad"/>
@@ -135,6 +133,7 @@
 <config key="5">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Compra / Toca No compra"/>
@@ -146,6 +145,7 @@
 <config key="6">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Producto"/>
@@ -157,6 +157,7 @@
 <config key="7">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Color"/>
@@ -168,6 +169,7 @@
 <config key="8">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Unidades"/>
@@ -179,6 +181,7 @@
 <config key="9">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Comentarios I"/>
@@ -190,6 +193,7 @@
 <config key="10">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Comentarios II"/>
@@ -201,6 +205,7 @@
 <config key="11">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Comentarios III"/>
@@ -212,6 +217,7 @@
 <config key="12">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Comentarios IV"/>
@@ -223,6 +229,7 @@
 <config key="13">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="DuraciÃ³n de la compra"/>
@@ -234,6 +241,7 @@
 <config key="14">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Col14"/>
@@ -245,6 +253,7 @@
 <config key="15">
 <entry key="UserSetValues" type="xboolean" value="false"/>
 <entry key="MissValuePattern" type="xstring" value="?"/>
+<entry key="FormatParameter" type="xstring" value=""/>
 <entry key="ReadPossValsFromFile" type="xboolean" value="false"/>
 <entry key="SkipThisColumn" type="xboolean" value="false"/>
 <entry key="ColumnName" type="xstring" value="Col15"/>
@@ -257,6 +266,21 @@
 </config>
 <entry key="customDescription" type="xstring" isnull="true" value=""/>
 <entry key="state" type="xstring" value="EXECUTED"/>
+<config key="nodecontainer_message">
+<entry key="type" type="xstring" value="WARNING"/>
+<entry key="message" type="xstring" value="The file 'file:/C:/Users/cito/Desktop/Copia%20de%20Carga%20de%20datos%20-%20La%20Anonima%20(Respuestas)%20-%20Respuestas%20de%20formulario%201.tsv' can't be accessed anymore!"/>
+</config>
+<entry key="factory" type="xstring" value="org.knime.base.node.io.filereader.FileReaderNodeFactory"/>
+<entry key="node-name" type="xstring" value="File Reader"/>
+<entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
+<entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base"/>
+<entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-bundle-version" type="xstring" value="0.0.0"/>
+<entry key="node-feature-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-symbolic-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-vendor" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-version" type="xstring" value="0.0.0"/>
+<config key="factory_settings"/>
 <entry key="name" type="xstring" value="File Reader"/>
 <entry key="hasContent" type="xboolean" value="true"/>
 <entry key="isInactive" type="xboolean" value="false"/>
@@ -271,6 +295,6 @@
 </config>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="08558146-9a32-49fa-9a75-b1ff067a6af8"/>
+<entry key="file_store_id" type="xstring" isnull="true" value=""/>
 </config>
 </config>

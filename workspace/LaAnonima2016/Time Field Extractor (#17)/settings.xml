@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
-<entry key="factory" type="xstring" value="org.knime.timeseries.node.extract.time.TimeFieldExtractorNodeFactory"/>
-<entry key="node-name" type="xstring" value="Time Field Extractor"/>
-<entry key="node-bundle-name" type="xstring" value="KNIME Time Series Nodes"/>
-<entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.timeseries"/>
-<entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
-<config key="factory_settings"/>
 <entry key="node_file" type="xstring" value="settings.xml"/>
 <config key="flow_stack"/>
 <config key="internal_node_subsettings">
@@ -60,6 +54,17 @@
 </config>
 <entry key="customDescription" type="xstring" isnull="true" value=""/>
 <entry key="state" type="xstring" value="EXECUTED"/>
+<entry key="factory" type="xstring" value="org.knime.timeseries.node.extract.time.TimeFieldExtractorNodeFactory"/>
+<entry key="node-name" type="xstring" value="Time Field Extractor"/>
+<entry key="node-bundle-name" type="xstring" value="KNIME Time Series Nodes"/>
+<entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.timeseries"/>
+<entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-bundle-version" type="xstring" value="3.1.1.v201601281239"/>
+<entry key="node-feature-name" type="xstring" value="KNIME Core"/>
+<entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.base.feature.group"/>
+<entry key="node-feature-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-feature-version" type="xstring" value="3.1.2.v201603311235"/>
+<config key="factory_settings"/>
 <entry key="name" type="xstring" value="Time Field Extractor"/>
 <entry key="hasContent" type="xboolean" value="true"/>
 <entry key="isInactive" type="xboolean" value="false"/>
@@ -68,12 +73,12 @@
 <entry key="index" type="xint" value="1"/>
 <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
 <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
-<entry key="port_object_summary" type="xstring" value="Rows: 1665, Cols: 19"/>
+<entry key="port_object_summary" type="xstring" value="Rows: 1665, Cols: 20"/>
 <entry key="port_dir_location" type="xstring" value="port_1"/>
 </config>
 </config>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="f2a6d296-4e36-4129-b6b0-a4f23c6fa7dc"/>
+<entry key="file_store_id" type="xstring" value="32cde7bf-68b0-4872-b6cb-3bbd4ae70602"/>
 </config>
 </config>
