@@ -2,7 +2,7 @@
   width: 100%;
 }
 #tabs li {
-  width: 25%;
+  width: 15%;
 }
 .tab-pane {
   border-bottom-left-radius: 4px;
@@ -12,7 +12,6 @@
   border-bottom: 1px solid #ddd;
 }
 .tab-pane.active {
-
   background: white;
   min-height: 600px;
 }
@@ -27,6 +26,7 @@
   overflow: hidden;
   background: white;
   width: 100%;
+  height: 600px;
 }
 #chart, #summarychart {
     width: 100%;

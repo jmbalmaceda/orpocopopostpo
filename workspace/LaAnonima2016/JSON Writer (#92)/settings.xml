@@ -6,7 +6,7 @@
 <entry key="type" type="xstring" value="variable"/>
 <entry key="name" type="xstring" value="json.writer.location"/>
 <entry key="class" type="xstring" value="STRING"/>
-<entry key="value" type="xstring" value="/home/jmbalmaceda/Orco/ComprasXDia"/>
+<entry key="value" type="xstring" value="C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXdia"/>
 </config>
 </config>
 <config key="internal_node_subsettings">
@@ -14,7 +14,7 @@
 </config>
 <config key="model">
 <entry key="inputColumn" type="xstring" value="JSON"/>
-<entry key="outputLocation" type="xstring" value="/home/jmbalmaceda/Orco/ComprasXDia"/>
+<entry key="outputLocation" type="xstring" value="C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXdia"/>
 <entry key="overwriteExistingFiles" type="xboolean" value="true"/>
 <entry key="extension" type="xstring" value=".json"/>
 <entry key="compressContents" type="xboolean" value="false"/>
@@ -40,6 +40,6 @@
 <config key="ports"/>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="3f49541f-5104-422a-bd9b-d3dfde60317e"/>
+<entry key="file_store_id" type="xstring" value="8f0c2e05-f418-4270-a1af-c81ceb33e26f"/>
 </config>
 </config>

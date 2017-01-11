@@ -90,10 +90,10 @@
 <entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base"/>
 <entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
 <entry key="node-bundle-version" type="xstring" value="3.1.2.v201603300837"/>
-<entry key="node-feature-name" type="xstring" value="Lhasa Metabolism Feature"/>
-<entry key="node-feature-symbolic-name" type="xstring" value="org.lhasalimited.knime.metabolism.feature.feature.group"/>
-<entry key="node-feature-vendor" type="xstring" value="Lhasa Limited (http://www.lhasalimited.org)"/>
-<entry key="node-feature-version" type="xstring" value="1.1.0.v201602151519"/>
+<entry key="node-feature-name" type="xstring" value="KNIME Core"/>
+<entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.base.feature.group"/>
+<entry key="node-feature-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-feature-version" type="xstring" value="3.1.2.v201603311235"/>
 <config key="factory_settings"/>
 <entry key="name" type="xstring" value="Table Row To Variable Loop Start"/>
 <entry key="hasContent" type="xboolean" value="true"/>
@@ -111,6 +111,6 @@
 </config>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="8d671f6d-589a-4b17-97a8-6694a994f218"/>
+<entry key="file_store_id" type="xstring" value="09b7698a-33e6-4e3f-bcd4-1d34c8302fe1"/>
 </config>
 </config>

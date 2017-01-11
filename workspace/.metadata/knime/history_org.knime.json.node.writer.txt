@@ -1,3 +1,8 @@
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXmes
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXsemana
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXdia
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXhora
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados
 /home/jmbalmaceda/Orco/ComprasXDia
 /home/jmbalmaceda/Orco/ComprasXHora
 /home/jmbalmaceda

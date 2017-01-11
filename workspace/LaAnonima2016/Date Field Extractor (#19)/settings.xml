@@ -85,10 +85,10 @@
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
-<entry key="include.Week of year" type="xboolean" value="false"/>
+<entry key="include.Week of year" type="xboolean" value="true"/>
 <config key="Week of year.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="false"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="Week of year.column.name" type="xstring" value="Week of year"/>
 </config>
@@ -113,12 +113,12 @@
 <entry key="index" type="xint" value="1"/>
 <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
 <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
-<entry key="port_object_summary" type="xstring" value="Rows: 1665, Cols: 19"/>
+<entry key="port_object_summary" type="xstring" value="Rows: 1892, Cols: 20"/>
 <entry key="port_dir_location" type="xstring" value="port_1"/>
 </config>
 </config>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="efa8469f-03d8-4f72-b425-988e367a879b"/>
+<entry key="file_store_id" type="xstring" value="771e3751-68ed-41a9-8b62-c20bc0cc94d0"/>
 </config>
 </config>

@@ -8,12 +8,17 @@
 		
 		<link rel="stylesheet" href="style.css" />
 
-		<script src="dataFunChannel.js"></script>
+		<script src="series/dataFunChannel.js"></script>
+		<script src="series/dataComprasPorMes.js"></script>
+		<script src="series/dataComprasPorSemana.js"></script>
+		<script src="series/dataComprasPorDia.js"></script>
+		<script src="series/dataComprasPorHora.js"></script>
 		
 		<script>
 			$(document).ready(function() { 
 				
 				<!-- FunChannel-->
+				//*
 				var categories = ['Shopper', 'Interaction', 'Interested', 'Product Zone', 'Shelve Transit', 'Total Customer'];
 				$(document).ready(function () {
 					$('#funChannelDiv').highcharts({
@@ -77,102 +82,18 @@
 						series: series
 					});
 				});
+				//*/
 				<!-- fin FanChannel -->
 				
-				
+				<!-- Compras por Hora -->
 				$(document).ready(function () {
-
-					var ranges = [
-							[Date.UTC(2017, 0,01,9,30),	123],
-							[Date.UTC(2017, 0,01,10),	133],
-							[Date.UTC(2017, 0,01,11),	113],
-							[Date.UTC(2017, 0,01,12),	143],
-							[Date.UTC(2017, 0,01,13),	123],
-							[Date.UTC(2017, 0,01,14),	123],
-							[Date.UTC(2017, 0,01,15),	123],
-							[Date.UTC(2017, 0,01,16),	133],
-							[Date.UTC(2017, 0,01,17),	143],
-							[Date.UTC(2017, 0,01,18),	153],
-							[Date.UTC(2017, 0,01,19),	143],
-							[Date.UTC(2017, 0,01,20),	133],
-							[Date.UTC(2017, 0,01,21),	123],
-							[Date.UTC(2017, 0,02,9),	123],
-							[Date.UTC(2017, 0,02,10),	133],
-							[Date.UTC(2017, 0,02,11),	143],
-							[Date.UTC(2017, 0,02,12),	133],
-							[Date.UTC(2017, 0,02,13),	123],
-							[Date.UTC(2017, 0,02,14),	223],
-							[Date.UTC(2017, 0,02,15),	223],
-							[Date.UTC(2017, 0,02,16),	243],
-							[Date.UTC(2017, 0,02,17),	253],
-							[Date.UTC(2017, 0,02,18),	263],
-							[Date.UTC(2017, 0,02,19),	223],
-							[Date.UTC(2017, 0,02,20),	213],
-							[Date.UTC(2017, 0,02,21),	123],
-							[Date.UTC(2017, 0,03,9),	123],
-							[Date.UTC(2017, 0,03,10),	133],
-							[Date.UTC(2017, 0,03,11),	143],
-							[Date.UTC(2017, 0,03,12),	133],
-							[Date.UTC(2017, 0,03,13),	123],
-							[Date.UTC(2017, 0,03,14),	223],
-							[Date.UTC(2017, 0,03,15),	223],
-							[Date.UTC(2017, 0,03,16),	243],
-							[Date.UTC(2017, 0,03,17),	253],
-							[Date.UTC(2017, 0,03,18),	263],
-							[Date.UTC(2017, 0,03,19),	223],
-							[Date.UTC(2017, 0,03,20),	213],
-							[Date.UTC(2017, 0,03,21),	123]
-						],
-						averages = [
-							[Date.UTC(2017, 0,01,9,30),	123],
-							[Date.UTC(2017, 0,01,10),	133],
-							[Date.UTC(2017, 0,01,11),	143],
-							[Date.UTC(2017, 0,01,12),	133],
-							[Date.UTC(2017, 0,01,13),	123],
-							[Date.UTC(2017, 0,01,14),	223],
-							[Date.UTC(2017, 0,01,15),	223],
-							[Date.UTC(2017, 0,01,16),	243],
-							[Date.UTC(2017, 0,01,17),	253],
-							[Date.UTC(2017, 0,01,18),	263],
-							[Date.UTC(2017, 0,01,19),	223],
-							[Date.UTC(2017, 0,01,20),	213],
-							[Date.UTC(2017, 0,01,21),	123],
-							[Date.UTC(2017, 0,02,9),	123],
-							[Date.UTC(2017, 0,02,10),	133],
-							[Date.UTC(2017, 0,02,11),	143],
-							[Date.UTC(2017, 0,02,12),	133],
-							[Date.UTC(2017, 0,02,13),	123],
-							[Date.UTC(2017, 0,02,14),	223],
-							[Date.UTC(2017, 0,02,15),	223],
-							[Date.UTC(2017, 0,02,16),	243],
-							[Date.UTC(2017, 0,02,17),	253],
-							[Date.UTC(2017, 0,02,18),	263],
-							[Date.UTC(2017, 0,02,19),	223],
-							[Date.UTC(2017, 0,02,20),	213],
-							[Date.UTC(2017, 0,02,21),	123],
-							[Date.UTC(2017, 0,03,9),	123],
-							[Date.UTC(2017, 0,03,10),	133],
-							[Date.UTC(2017, 0,03,11),	143],
-							[Date.UTC(2017, 0,03,12),	133],
-							[Date.UTC(2017, 0,03,13),	123],
-							[Date.UTC(2017, 0,03,14),	223],
-							[Date.UTC(2017, 0,03,15),	223],
-							[Date.UTC(2017, 0,03,16),	243],
-							[Date.UTC(2017, 0,03,17),	253],
-							[Date.UTC(2017, 0,03,18),	263],
-							[Date.UTC(2017, 0,03,19),	223],
-							[Date.UTC(2017, 0,03,20),	213],
-							[Date.UTC(2017, 0,03,21),	123]
-						];
-
-
-					Highcharts.chart('comprasPorDiaDiv', {
+					Highcharts.chart('comprasPorHoraDiv', {
 						chart: {
 							type: 'spline',
 							zoomType: 'x'
 						},
 						title: {
-							text: 'July temperatures'
+							text: 'Compras por Hora'
 						},
 
 						xAxis: {
@@ -185,36 +106,140 @@
 						yAxis: {
 							title: {
 								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true//,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesComprasPorHora
+					});
+				});
+				<!-- fin Compras por Hora -->
+				
+				<!-- Compras por Dia -->
+				$(document).ready(function () {
+					Highcharts.chart('comprasPorDiaDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Compras por día'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
 							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true//,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesComprasPorDia
+					});
+				});
+				<!-- fin Compras por Dia -->
+				
+				<!-- Compras por Semana -->
+				$(document).ready(function () {
+					Highcharts.chart('comprasPorSemanaDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Compras por Semana'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
 						},
 
 						tooltip: {
 							crosshairs: true,
-							shared: true,
-							valueSuffix: '°C'
+							//shared: true
 						},
 
 						legend: {
+							enabled: true
 						},
 
-						series: [{
-							name: 'Temperature',
-							data: averages,
-							//type: 'area',
-							zIndex: 1,
-							marker: {
-								fillColor: 'white',
-								lineWidth: 2,
-								lineColor: Highcharts.getOptions().colors[0]
-							}
-						}, {
-							name: 'Range',
-							data: ranges//,
-							//type: 'column'
-						}]
+						series: seriesComprasPorSemana
 					});
 				});
+				<!-- fin Compras por Semana -->
 				
+				<!-- Compras por Mes -->
+				$(document).ready(function () {
+					Highcharts.chart('comprasPorMesDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Compras por Mes'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesComprasPorMes
+					});
+				});
+				<!-- fin Compras por Mes -->
 			});
 		</script>
 		
@@ -226,21 +251,35 @@
 			  <li role="presentation" id="summary-tab" class="summary-tab active">
 				<a href="#summary-panel" aria-controls="settings" role="tab" data-toggle="tab">Fun Channel</a>
 			  </li>
-			  <li role="presentation" id="chart-tab" class="chart-tab">
-				<a href="#chart-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por día</a>
+			  <li role="presentation" id="comprasPorMes-tab" class="comprasPorMes-tab">
+				<a href="#comprasPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Mes</a>
+			  </li>
+			  <li role="presentation" id="comprasPorSemana-tab" class="comprasPorSemana-tab">
+				<a href="#comprasPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Semana</a>
+			  </li>
+			  <li role="presentation" id="comprasPorDia-tab" class="comprasPorDia-tab">
+				<a href="#comprasPorDia-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por día</a>
+			  </li>
+			  <li role="presentation" id="comprasPorHora-tab" class="comprasPorHora-tab">
+				<a href="#comprasPorHora-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Hora</a>
 			  </li>
 			</ul>
 
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane fade in active" id="summary-panel" class="summary-tab">
-					<div class="chart-container">
-						<div id="funChannelDiv"></div>
-					</div>
+					<div class="chart-container" id="funChannelDiv"></div>
 				</div>
-				<div role="tabpanel" class="tab-pane fade" id="chart-panel" class="chart-tab">
-					<div class="chart-container">
-						<div id="comprasPorDiaDiv"></div>
-					</div>
+				<div role="tabpanel" class="tab-pane fade" id="comprasPorHora-panel" class="comprasPorHora-tab">
+					<div class="chart-container" id="comprasPorHoraDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="comprasPorDia-panel" class="comprasPorDia-tab">
+					<div class="chart-container" id="comprasPorDiaDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="comprasPorSemana-panel" class="comprasPorSemana-tab">
+					<div class="chart-container" id="comprasPorSemanaDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="comprasPorMes-panel" class="comprasPorMes-tab">
+					<div class="chart-container" id="comprasPorMesDiv"></div>
 				</div>
 			</div>
 			<!--

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="spec.xml">
-<entry key="spec_name" type="xstring" value="Copia%20de%20Carga%20de%20datos%20-%20La%20Anonima%20(Respuestas)%20-%20Respuestas%20de%20formulario%201.tsv"/>
+<entry key="spec_name" type="xstring" value="Carga%20de%20datos%20-%20La%20Anonima%20(Respuestas)%20-%20Respuestas%20de%20formulario%201.tsv"/>
 <entry key="number_columns" type="xint" value="16"/>
 <config key="column_spec_0">
 <entry key="column_name" type="xstring" value="Marca temporal"/>
@@ -23,7 +23,7 @@
 </config>
 <config key="column_domain">
 <config key="possible_values">
-<entry key="array-size" type="xint" value="22"/>
+<entry key="array-size" type="xint" value="24"/>
 <config key="0">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
@@ -156,6 +156,18 @@
 <entry key="StringCell" type="xstring" value="19/11/2016"/>
 </config>
 </config>
+<config key="22">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="6/12/2016"/>
+</config>
+</config>
+<config key="23">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="28/11/2016"/>
+</config>
+</config>
 </config>
 </config>
 <config key="column_properties"/>
@@ -282,7 +294,7 @@
 </config>
 <config key="column_domain">
 <config key="possible_values">
-<entry key="array-size" type="xint" value="37"/>
+<entry key="array-size" type="xint" value="39"/>
 <config key="0">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
@@ -496,13 +508,25 @@
 <config key="35">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
-<entry key="StringCell" type="xstring" value="Verde, Amarillo "/>
+<entry key="StringCell" type="xstring" value="Verde, Amarillo"/>
 </config>
 </config>
 <config key="36">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
 <entry key="StringCell" type="xstring" value="Amarillo, Rosa, Violeta"/>
+</config>
+</config>
+<config key="37">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="Blanco, Rosa"/>
+</config>
+</config>
+<config key="38">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="Naranja, Verde"/>
 </config>
 </config>
 </config>
@@ -592,7 +616,7 @@
 </config>
 <config key="column_domain">
 <config key="possible_values">
-<entry key="array-size" type="xint" value="34"/>
+<entry key="array-size" type="xint" value="35"/>
 <config key="0">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
@@ -608,7 +632,7 @@
 <config key="2">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
-<entry key="StringCell" type="xstring" value="Carro lleno "/>
+<entry key="StringCell" type="xstring" value="Carro lleno"/>
 </config>
 </config>
 <config key="3">
@@ -797,6 +821,12 @@
 <entry key="StringCell" type="xstring" value="Lista papel"/>
 </config>
 </config>
+<config key="34">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="Con lavandina"/>
+</config>
+</config>
 </config>
 </config>
 <config key="column_properties"/>
@@ -811,7 +841,7 @@
 </config>
 <config key="column_domain">
 <config key="possible_values">
-<entry key="array-size" type="xint" value="10"/>
+<entry key="array-size" type="xint" value="11"/>
 <config key="0">
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
@@ -870,6 +900,12 @@
 <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
 <config key="org.knime.core.data.def.StringCell">
 <entry key="StringCell" type="xstring" value="POET ROSA"/>
+</config>
+</config>
+<config key="10">
+<entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+<config key="org.knime.core.data.def.StringCell">
+<entry key="StringCell" type="xstring" value="Con lista papel"/>
 </config>
 </config>
 </config>

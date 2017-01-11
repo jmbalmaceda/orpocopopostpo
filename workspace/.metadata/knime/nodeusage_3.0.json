@@ -6,8 +6,8 @@
         "nodes":[
             {
                 "id":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer",
-                "nrexecs":11,
-                "exectime":105,
+                "nrexecs":21,
+                "exectime":539,
                 "nrcreated":4,
                 "successor":"n/a"
             },
@@ -27,64 +27,64 @@
             },
             {
                 "id":"org.knime.json.node.fromtable.TableToJsonNodeFactory#Table to JSON",
-                "nrexecs":127,
-                "exectime":1546,
+                "nrexecs":347,
+                "exectime":3965,
                 "nrcreated":4,
                 "successor":"org.knime.json.node.combine.row.RowCombineJsonNodeFactory#JSON Row Combiner"
             },
             {
                 "id":"org.knime.base.node.jsnippet.JavaSnippetNodeFactory#Java Snippet",
-                "nrexecs":140,
-                "exectime":667,
+                "nrexecs":360,
+                "exectime":2078,
                 "nrcreated":4,
                 "successor":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename"
             },
             {
                 "id":"org.knime.base.node.io.filereader.FileReaderNodeFactory#File Reader",
-                "nrexecs":0,
-                "exectime":0,
+                "nrexecs":1,
+                "exectime":247,
                 "nrcreated":0,
                 "successor":"org.knime.timeseries.node.stringtotimestamp.String2DateNodeFactory#String to Date/Time"
             },
             {
                 "id":"org.knime.base.node.flowvariable.variableloophead.LoopStartVariableNodeFactory#Table Row To Variable Loop Start",
-                "nrexecs":140,
-                "exectime":161,
+                "nrexecs":360,
+                "exectime":654,
                 "nrcreated":0,
                 "successor":"org.knime.base.node.preproc.rowkey2.RowKeyNodeFactory2#RowID"
             },
             {
                 "id":"org.knime.timeseries.node.stringtotimestamp.String2DateNodeFactory#String to Date/Time",
-                "nrexecs":2,
-                "exectime":176,
+                "nrexecs":4,
+                "exectime":438,
                 "nrcreated":0,
                 "successor":"n/a"
             },
             {
                 "id":"org.knime.base.node.preproc.stringreplacer.StringReplacerNodeFactory#String Replacer",
-                "nrexecs":2,
-                "exectime":59,
+                "nrexecs":4,
+                "exectime":97,
                 "nrcreated":0,
                 "successor":"n/a"
             },
             {
                 "id":"org.knime.base.node.preproc.filter.row.RowFilterNodeFactory#Row Filter",
-                "nrexecs":1,
-                "exectime":28,
+                "nrexecs":2,
+                "exectime":78,
                 "nrcreated":0,
                 "successor":"org.knime.base.node.preproc.colconvert.stringtonumber.StringToNumberNodeFactory#String To Number"
             },
             {
                 "id":"org.knime.timeseries.node.extract.date.DateFieldExtractorNodeFactory#Date Field Extractor",
-                "nrexecs":3,
-                "exectime":29,
+                "nrexecs":5,
+                "exectime":404,
                 "nrcreated":0,
                 "successor":"n/a"
             },
             {
                 "id":"org.knime.timeseries.node.extract.time.TimeFieldExtractorNodeFactory#Time Field Extractor",
-                "nrexecs":3,
-                "exectime":29,
+                "nrexecs":5,
+                "exectime":130,
                 "nrcreated":0,
                 "successor":"org.knime.ext.sun.nodes.script.node.rowfilter.JavaRowFilterNodeFactory#Java Snippet Row Filter"
             },
@@ -97,8 +97,8 @@
             },
             {
                 "id":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename",
-                "nrexecs":142,
-                "exectime":52,
+                "nrexecs":362,
+                "exectime":360,
                 "nrcreated":1,
                 "successor":"org.knime.json.node.fromtable.TableToJsonNodeFactory#Table to JSON"
             },
@@ -111,15 +111,15 @@
             },
             {
                 "id":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy",
-                "nrexecs":123,
-                "exectime":413,
+                "nrexecs":343,
+                "exectime":2258,
                 "nrcreated":2,
                 "successor":"org.knime.base.node.jsnippet.JavaSnippetNodeFactory#Java Snippet"
             },
             {
                 "id":"org.knime.ext.sun.nodes.script.node.rowfilter.JavaRowFilterNodeFactory#Java Snippet Row Filter",
-                "nrexecs":122,
-                "exectime":1822,
+                "nrexecs":342,
+                "exectime":10058,
                 "nrcreated":1,
                 "successor":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy"
             },
@@ -132,8 +132,8 @@
             },
             {
                 "id":"org.knime.base.node.preproc.colconvert.stringtonumber.StringToNumberNodeFactory#String To Number",
-                "nrexecs":2,
-                "exectime":16,
+                "nrexecs":3,
+                "exectime":47,
                 "nrcreated":1,
                 "successor":"org.knime.timeseries.node.extract.date.DateFieldExtractorNodeFactory#Date Field Extractor"
             },
@@ -174,8 +174,8 @@
             },
             {
                 "id":"org.knime.json.node.combine.row.RowCombineJsonNodeFactory#JSON Row Combiner",
-                "nrexecs":128,
-                "exectime":179,
+                "nrexecs":359,
+                "exectime":1667,
                 "nrcreated":3,
                 "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
             },
@@ -188,15 +188,15 @@
             },
             {
                 "id":"org.knime.base.node.meta.looper.LoopEndNodeFactory#Loop End",
-                "nrexecs":120,
-                "exectime":79,
+                "nrexecs":340,
+                "exectime":296,
                 "nrcreated":1,
                 "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
             },
             {
                 "id":"org.knime.json.node.output.JSONOutputNodeFactory#JSON Output",
-                "nrexecs":4,
-                "exectime":1,
+                "nrexecs":15,
+                "exectime":38,
                 "nrcreated":1,
                 "successor":"n/a"
             },
@@ -227,9 +227,9 @@
         "wrappedNodes":{
         }
     },
-    "uptime":9741534,
-    "launches":2,
-    "timeSinceLastStart":3032169,
+    "uptime":10470045,
+    "launches":3,
+    "timeSinceLastStart":11927069,
     "crashes":0,
     "properlyShutDown":true
 }
