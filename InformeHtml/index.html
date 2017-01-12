@@ -13,6 +13,10 @@
 		<script src="series/dataComprasPorSemana.js"></script>
 		<script src="series/dataComprasPorDia.js"></script>
 		<script src="series/dataComprasPorHora.js"></script>
+		<script src="series/dataTocaPorMes.js"></script>
+		<script src="series/dataTocaPorSemana.js"></script>
+		<script src="series/dataTocaPorDia.js"></script>
+		<script src="series/dataTocaPorHora.js"></script>
 		
 		<script>
 			$(document).ready(function() { 
@@ -240,6 +244,163 @@
 					});
 				});
 				<!-- fin Compras por Mes -->
+				
+				
+				<!-- Toca por Hora -->
+				$(document).ready(function () {
+					Highcharts.chart('tocaPorHoraDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Interacciones sin Compra por Hora'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true//,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesTocaPorHora
+					});
+				});
+				<!-- fin Toca por Hora -->
+				
+				<!-- Toca por Dia -->
+				$(document).ready(function () {
+					Highcharts.chart('tocaPorDiaDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Interacciones sin Compra por Día'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true//,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesTocaPorDia
+					});
+				});
+				<!-- fin Toca por Dia -->
+				
+				<!-- Toca por Semana -->
+				$(document).ready(function () {
+					Highcharts.chart('tocaPorSemanaDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Interacciones sin Compra por Semana'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesTocaPorSemana
+					});
+				});
+				<!-- fin Toca por Semana -->
+				
+				<!-- Toca por Mes -->
+				$(document).ready(function () {
+					Highcharts.chart('tocaPorMesDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Interacciones sin Compra por Mes'
+						},
+
+						xAxis: {
+							type: 'datetime',
+							dateTimeLabelFormats: {
+							   day: '%d %b %Y'    //ex- 01 Jan 2016
+							}
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesTocaPorMes
+					});
+				});
+				<!-- fin Toca por Mes -->
 			});
 		</script>
 		
@@ -248,27 +409,51 @@
 
 	<body>
 			<ul id="tabs" class="nav nav-tabs" role="tablist">
-			  <li role="presentation" id="summary-tab" class="summary-tab active">
-				<a href="#summary-panel" aria-controls="settings" role="tab" data-toggle="tab">Fun Channel</a>
-			  </li>
-			  <li role="presentation" id="comprasPorMes-tab" class="comprasPorMes-tab">
-				<a href="#comprasPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Mes</a>
-			  </li>
-			  <li role="presentation" id="comprasPorSemana-tab" class="comprasPorSemana-tab">
-				<a href="#comprasPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Semana</a>
-			  </li>
-			  <li role="presentation" id="comprasPorDia-tab" class="comprasPorDia-tab">
-				<a href="#comprasPorDia-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por d&iacute;a</a>
-			  </li>
-			  <li role="presentation" id="comprasPorHora-tab" class="comprasPorHora-tab">
-				<a href="#comprasPorHora-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Hora</a>
-			  </li>
+				<li role="presentation" id="summary-tab" class="summary-tab active">
+					<a href="#summary-panel" aria-controls="settings" role="tab" data-toggle="tab">Fun Channel</a>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Compras<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#comprasPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Mes</a>
+						</li>
+						<li>
+							<a href="#comprasPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Semana</a>
+						</li>
+						<li>
+							<a href="#comprasPorDia-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por d&iacute;a</a>
+						</li>
+						<li>
+							<a href="#comprasPorHora-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Hora</a>
+						</li>                       
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Interacciones<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#tocaPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Mes</a>
+						</li>
+						<li>
+							<a href="#tocaPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Semana</a>
+						</li>
+						<li>
+							<a href="#tocaPorDia-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por d&iacute;a</a>
+						</li>
+						<li>
+							<a href="#tocaPorHora-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Hora</a>
+						</li>                       
+					</ul>
+				</li>
 			</ul>
 
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane fade in active" id="summary-panel" class="summary-tab">
 					<div class="chart-container" id="funChannelDiv"></div>
 				</div>
+				
+				<!-- Compras -->
 				<div role="tabpanel" class="tab-pane fade" id="comprasPorHora-panel" class="comprasPorHora-tab">
 					<div class="chart-container" id="comprasPorHoraDiv"></div>
 				</div>
@@ -280,6 +465,20 @@
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="comprasPorMes-panel" class="comprasPorMes-tab">
 					<div class="chart-container" id="comprasPorMesDiv"></div>
+				</div>
+				
+				<!-- Interacciones sin compra -->
+				<div role="tabpanel" class="tab-pane fade" id="tocaPorHora-panel" class="tocaPorHora-tab">
+					<div class="chart-container" id="tocaPorHoraDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tocaPorDia-panel" class="tocaPorDia-tab">
+					<div class="chart-container" id="tocaPorDiaDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tocaPorSemana-panel" class="tocaPorSemana-tab">
+					<div class="chart-container" id="tocaPorSemanaDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tocaPorMes-panel" class="tocaPorMes-tab">
+					<div class="chart-container" id="tocaPorMesDiv"></div>
 				</div>
 			</div>
 			<!--

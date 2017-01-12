@@ -6,8 +6,8 @@
         "nodes":[
             {
                 "id":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer",
-                "nrexecs":21,
-                "exectime":539,
+                "nrexecs":31,
+                "exectime":991,
                 "nrcreated":4,
                 "successor":"n/a"
             },
@@ -27,15 +27,15 @@
             },
             {
                 "id":"org.knime.json.node.fromtable.TableToJsonNodeFactory#Table to JSON",
-                "nrexecs":347,
-                "exectime":3965,
+                "nrexecs":627,
+                "exectime":8055,
                 "nrcreated":4,
                 "successor":"org.knime.json.node.combine.row.RowCombineJsonNodeFactory#JSON Row Combiner"
             },
             {
                 "id":"org.knime.base.node.jsnippet.JavaSnippetNodeFactory#Java Snippet",
-                "nrexecs":360,
-                "exectime":2078,
+                "nrexecs":640,
+                "exectime":4294,
                 "nrcreated":4,
                 "successor":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename"
             },
@@ -48,8 +48,8 @@
             },
             {
                 "id":"org.knime.base.node.flowvariable.variableloophead.LoopStartVariableNodeFactory#Table Row To Variable Loop Start",
-                "nrexecs":360,
-                "exectime":654,
+                "nrexecs":640,
+                "exectime":2189,
                 "nrcreated":0,
                 "successor":"org.knime.base.node.preproc.rowkey2.RowKeyNodeFactory2#RowID"
             },
@@ -58,7 +58,7 @@
                 "nrexecs":4,
                 "exectime":438,
                 "nrcreated":0,
-                "successor":"n/a"
+                "successor":"org.knime.base.node.preproc.filter.row.RowFilterNodeFactory#Row Filter"
             },
             {
                 "id":"org.knime.base.node.preproc.stringreplacer.StringReplacerNodeFactory#String Replacer",
@@ -69,22 +69,22 @@
             },
             {
                 "id":"org.knime.base.node.preproc.filter.row.RowFilterNodeFactory#Row Filter",
-                "nrexecs":2,
-                "exectime":78,
+                "nrexecs":3,
+                "exectime":412,
                 "nrcreated":0,
                 "successor":"org.knime.base.node.preproc.colconvert.stringtonumber.StringToNumberNodeFactory#String To Number"
             },
             {
                 "id":"org.knime.timeseries.node.extract.date.DateFieldExtractorNodeFactory#Date Field Extractor",
-                "nrexecs":5,
-                "exectime":404,
+                "nrexecs":7,
+                "exectime":913,
                 "nrcreated":0,
                 "successor":"n/a"
             },
             {
                 "id":"org.knime.timeseries.node.extract.time.TimeFieldExtractorNodeFactory#Time Field Extractor",
-                "nrexecs":5,
-                "exectime":130,
+                "nrexecs":7,
+                "exectime":888,
                 "nrcreated":0,
                 "successor":"org.knime.ext.sun.nodes.script.node.rowfilter.JavaRowFilterNodeFactory#Java Snippet Row Filter"
             },
@@ -97,8 +97,8 @@
             },
             {
                 "id":"org.knime.base.node.preproc.rename.RenameNodeFactory#Column Rename",
-                "nrexecs":362,
-                "exectime":360,
+                "nrexecs":642,
+                "exectime":1233,
                 "nrcreated":1,
                 "successor":"org.knime.json.node.fromtable.TableToJsonNodeFactory#Table to JSON"
             },
@@ -111,15 +111,15 @@
             },
             {
                 "id":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy",
-                "nrexecs":343,
-                "exectime":2258,
+                "nrexecs":624,
+                "exectime":6117,
                 "nrcreated":2,
                 "successor":"org.knime.base.node.jsnippet.JavaSnippetNodeFactory#Java Snippet"
             },
             {
                 "id":"org.knime.ext.sun.nodes.script.node.rowfilter.JavaRowFilterNodeFactory#Java Snippet Row Filter",
-                "nrexecs":342,
-                "exectime":10058,
+                "nrexecs":622,
+                "exectime":19540,
                 "nrcreated":1,
                 "successor":"org.knime.base.node.preproc.groupby.GroupByNodeFactory#GroupBy"
             },
@@ -132,8 +132,8 @@
             },
             {
                 "id":"org.knime.base.node.preproc.colconvert.stringtonumber.StringToNumberNodeFactory#String To Number",
-                "nrexecs":3,
-                "exectime":47,
+                "nrexecs":4,
+                "exectime":347,
                 "nrcreated":1,
                 "successor":"org.knime.timeseries.node.extract.date.DateFieldExtractorNodeFactory#Date Field Extractor"
             },
@@ -174,8 +174,8 @@
             },
             {
                 "id":"org.knime.json.node.combine.row.RowCombineJsonNodeFactory#JSON Row Combiner",
-                "nrexecs":359,
-                "exectime":1667,
+                "nrexecs":652,
+                "exectime":4392,
                 "nrcreated":3,
                 "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
             },
@@ -188,15 +188,15 @@
             },
             {
                 "id":"org.knime.base.node.meta.looper.LoopEndNodeFactory#Loop End",
-                "nrexecs":340,
-                "exectime":296,
+                "nrexecs":620,
+                "exectime":1154,
                 "nrcreated":1,
                 "successor":"org.knime.json.node.writer.JSONWriterNodeFactory#JSON Writer"
             },
             {
                 "id":"org.knime.json.node.output.JSONOutputNodeFactory#JSON Output",
-                "nrexecs":15,
-                "exectime":38,
+                "nrexecs":27,
+                "exectime":62,
                 "nrcreated":1,
                 "successor":"n/a"
             },
@@ -227,9 +227,9 @@
         "wrappedNodes":{
         }
     },
-    "uptime":10470045,
-    "launches":3,
-    "timeSinceLastStart":11927069,
+    "uptime":12999554,
+    "launches":4,
+    "timeSinceLastStart":20588084,
     "crashes":0,
     "properlyShutDown":true
 }

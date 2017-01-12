@@ -43,7 +43,7 @@
           <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo</tags>
           <tags>persp.actionSet:org.eclipse.ui.actionSet.openFiles</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEddHEeayzITsuNGiTg" selectedElement="_hPqvGtdHEeayzITsuNGiTg" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" visible="false" containerData="3000" selectedElement="_hPqvFddHEeayzITsuNGiTg">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" visible="false" containerData="3000" selectedElement="_hPqvE9dHEeayzITsuNGiTg">
               <children xsi:type="basic:PartStack" xmi:id="_hPqvE9dHEeayzITsuNGiTg" elementId="org.knime.workbench.explorer.viewMStack" visible="false" containerData="3000" selectedElement="_hPqvFNdHEeayzITsuNGiTg">
                 <tags>noFocus</tags>
                 <tags>Minimized</tags>

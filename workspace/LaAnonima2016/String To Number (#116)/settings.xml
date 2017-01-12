@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
+<entry key="node_file" type="xstring" value="settings.xml"/>
+<config key="flow_stack"/>
+<config key="internal_node_subsettings">
+<entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
+</config>
+<config key="model">
+<config key="include_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_filterString"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<config key="include">
+<config key="InclList">
+<entry key="array-size" type="xint" value="1"/>
+<entry key="0" type="xstring" value="Unidades"/>
+</config>
+<config key="ExclList">
+<entry key="array-size" type="xint" value="14"/>
+<entry key="0" type="xstring" value="Marca temporal"/>
+<entry key="1" type="xstring" value="Fecha"/>
+<entry key="2" type="xstring" value="Hora"/>
+<entry key="3" type="xstring" value="Genero / Sexo"/>
+<entry key="4" type="xstring" value="Compra / Toca No compra"/>
+<entry key="5" type="xstring" value="Producto"/>
+<entry key="6" type="xstring" value="Color"/>
+<entry key="7" type="xstring" value="Comentarios I"/>
+<entry key="8" type="xstring" value="Comentarios II"/>
+<entry key="9" type="xstring" value="Comentarios III"/>
+<entry key="10" type="xstring" value="Comentarios IV"/>
+<entry key="11" type="xstring" value="DuraciÃ³n de la compra"/>
+<entry key="12" type="xstring" value="Col14"/>
+<entry key="13" type="xstring" value="Col15"/>
+</config>
+<entry key="keep_all_columns_selected" type="xboolean" value="false"/>
+</config>
+<entry key="decimal_separator" type="xstring" value="."/>
+<entry key="thousands_separator" type="xstring" value=""/>
+<config key="parse_type">
+<entry key="cell_class" type="xstring" value="org.knime.core.data.def.IntCell"/>
+<entry key="is_null" type="xboolean" value="false"/>
+</config>
+<entry key="generic_parse" type="xboolean" value="false"/>
+</config>
+<entry key="customDescription" type="xstring" isnull="true" value=""/>
+<entry key="state" type="xstring" value="EXECUTED"/>
+<entry key="factory" type="xstring" value="org.knime.base.node.preproc.colconvert.stringtonumber.StringToNumberNodeFactory"/>
+<entry key="node-name" type="xstring" value="String To Number"/>
+<entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
+<entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base"/>
+<entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-bundle-version" type="xstring" value="3.1.2.v201603300837"/>
+<entry key="node-feature-name" type="xstring" value="KNIME Core"/>
+<entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.base.feature.group"/>
+<entry key="node-feature-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
+<entry key="node-feature-version" type="xstring" value="3.1.2.v201603311235"/>
+<config key="factory_settings"/>
+<entry key="name" type="xstring" value="String To Number"/>
+<entry key="hasContent" type="xboolean" value="true"/>
+<entry key="isInactive" type="xboolean" value="false"/>
+<config key="ports">
+<config key="port_1">
+<entry key="index" type="xint" value="1"/>
+<entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
+<entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
+<entry key="port_object_summary" type="xstring" value="Rows: 159, Cols: 16"/>
+<entry key="port_dir_location" type="xstring" value="port_1"/>
+</config>
+</config>
+<config key="filestores">
+<entry key="file_store_location" type="xstring" isnull="true" value=""/>
+<entry key="file_store_id" type="xstring" value="e0b3c56b-57e5-4b88-9ab2-c0d1eea5c01a"/>
+</config>
+</config>
