@@ -11,26 +11,31 @@
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="selected.timestamp.column" type="xstring" value="Fecha"/>
-<config key="include.Year_Internals">
-<entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
-</config>
-<entry key="include.Year" type="xboolean" value="true"/>
 <config key="Year.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="Year.column.name" type="xstring" value="Year"/>
-<config key="include.Quarter_Internals">
+<config key="include.Year_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
-<entry key="include.Quarter" type="xboolean" value="false"/>
+<entry key="include.Year" type="xboolean" value="true"/>
 <config key="Quarter.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
 <entry key="EnabledStatus" type="xboolean" value="false"/>
 </config>
 <entry key="Quarter.column.name" type="xstring" value="Quarter"/>
+<config key="include.Quarter_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<entry key="include.Quarter" type="xboolean" value="false"/>
+<config key="Month.column.name_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<entry key="Month.column.name" type="xstring" value="Month"/>
 <config key="include.Month_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -41,21 +46,11 @@
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="Month.representation" type="xstring" value="Number"/>
-<config key="Month.column.name_Internals">
+<config key="Day of week.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
+<entry key="EnabledStatus" type="xboolean" value="false"/>
 </config>
-<entry key="Month.column.name" type="xstring" value="Month"/>
-<config key="include.Day of month_Internals">
-<entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
-</config>
-<entry key="include.Day of month" type="xboolean" value="true"/>
-<config key="Day of month.column.name_Internals">
-<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
-</config>
-<entry key="Day of month.column.name" type="xstring" value="Day of month"/>
+<entry key="Day of week.column.name" type="xstring" value="Day of week"/>
 <config key="include.Day of week_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -66,31 +61,36 @@
 <entry key="EnabledStatus" type="xboolean" value="false"/>
 </config>
 <entry key="Day of week.representation" type="xstring" value="Text"/>
-<config key="Day of week.column.name_Internals">
+<config key="Day of month.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="false"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
-<entry key="Day of week.column.name" type="xstring" value="Day of week"/>
-<config key="include.Day of year_Internals">
+<entry key="Day of month.column.name" type="xstring" value="Day of month"/>
+<config key="include.Day of month_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
-<entry key="include.Day of year" type="xboolean" value="false"/>
+<entry key="include.Day of month" type="xboolean" value="true"/>
 <config key="Day of year.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
 <entry key="EnabledStatus" type="xboolean" value="false"/>
 </config>
 <entry key="Day of year.column.name" type="xstring" value="Day of year"/>
-<config key="include.Week of year_Internals">
+<config key="include.Day of year_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
-<entry key="include.Week of year" type="xboolean" value="true"/>
+<entry key="include.Day of year" type="xboolean" value="false"/>
 <config key="Week of year.column.name_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="Week of year.column.name" type="xstring" value="Week of year"/>
+<config key="include.Week of year_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<entry key="include.Week of year" type="xboolean" value="true"/>
 </config>
 <entry key="customDescription" type="xstring" isnull="true" value=""/>
 <entry key="state" type="xstring" value="EXECUTED"/>
@@ -113,12 +113,12 @@
 <entry key="index" type="xint" value="1"/>
 <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
 <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
-<entry key="port_object_summary" type="xstring" value="Rows: 1892, Cols: 20"/>
+<entry key="port_object_summary" type="xstring" value="Rows: 1892, Cols: 43"/>
 <entry key="port_dir_location" type="xstring" value="port_1"/>
 </config>
 </config>
 <config key="filestores">
 <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-<entry key="file_store_id" type="xstring" value="771e3751-68ed-41a9-8b62-c20bc0cc94d0"/>
+<entry key="file_store_id" type="xstring" value="7eb65397-cf4f-40ca-ac90-d5f3ff77a88f"/>
 </config>
 </config>

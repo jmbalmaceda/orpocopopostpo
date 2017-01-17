@@ -3,7 +3,7 @@
   <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.ide.FileStoreEditorInputFactory&quot; id=&quot;org.knime.workbench.editor.WorkflowEditor&quot; name=&quot;workflow.knime&quot; tooltip=&quot;knime://LOCAL/LaAnonima2016/workflow.knime&quot;>&#xD;&#xA;&lt;persistable uri=&quot;knime://LOCAL/LaAnonima2016/workflow.knime&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_faO3cNdHEeayzITsuNGiTg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_gfPXs9dHEeayzITsuNGiTg" x="0" y="0" width="1024" height="768">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_faO3cNdHEeayzITsuNGiTg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_gfPXs9dHEeayzITsuNGiTg" x="676" y="0" width="697" height="775">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -43,18 +43,17 @@
           <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo</tags>
           <tags>persp.actionSet:org.eclipse.ui.actionSet.openFiles</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEddHEeayzITsuNGiTg" selectedElement="_hPqvGtdHEeayzITsuNGiTg" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" visible="false" containerData="3000" selectedElement="_hPqvE9dHEeayzITsuNGiTg">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" containerData="3000" selectedElement="_hPqvFddHEeayzITsuNGiTg">
               <children xsi:type="basic:PartStack" xmi:id="_hPqvE9dHEeayzITsuNGiTg" elementId="org.knime.workbench.explorer.viewMStack" visible="false" containerData="3000" selectedElement="_hPqvFNdHEeayzITsuNGiTg">
                 <tags>noFocus</tags>
                 <tags>Minimized</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_hPqvFNdHEeayzITsuNGiTg" elementId="org.knime.workbench.explorer.view" ref="_hPnrwNdHEeayzITsuNGiTg"/>
               </children>
-              <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvFddHEeayzITsuNGiTg" visible="false" containerData="7000" selectedElement="_hPqvGNdHEeayzITsuNGiTg">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvFddHEeayzITsuNGiTg" containerData="7000" selectedElement="_hPqvGNdHEeayzITsuNGiTg">
                 <children xsi:type="basic:PartStack" xmi:id="_hPqvFtdHEeayzITsuNGiTg" elementId="org.knime.workbench.ui.favoritesMStack" toBeRendered="false" containerData="3293">
                   <children xsi:type="advanced:Placeholder" xmi:id="_hPqvF9dHEeayzITsuNGiTg" elementId="org.knime.workbench.ui.favorites" toBeRendered="false" ref="_hPqIAddHEeayzITsuNGiTg"/>
                 </children>
-                <children xsi:type="basic:PartStack" xmi:id="_hPqvGNdHEeayzITsuNGiTg" elementId="org.knime.workbench.repository.view.RepositoryViewMStack" visible="false" containerData="6707" selectedElement="_hPqvGddHEeayzITsuNGiTg">
-                  <tags>Minimized</tags>
+                <children xsi:type="basic:PartStack" xmi:id="_hPqvGNdHEeayzITsuNGiTg" elementId="org.knime.workbench.repository.view.RepositoryViewMStack" containerData="6707" selectedElement="_hPqvGddHEeayzITsuNGiTg">
                   <children xsi:type="advanced:Placeholder" xmi:id="_hPqvGddHEeayzITsuNGiTg" elementId="org.knime.workbench.repository.view.RepositoryView" ref="_hPo54NdHEeayzITsuNGiTg">
                     <tags>NoClose</tags>
                   </children>
@@ -217,7 +216,7 @@
       <children xsi:type="menu:ToolControl" xmi:id="_LV-QkNeXEeatkcdPWCJSdQ" elementId="org.knime.workbench.explorer.viewMStack(org.knime.workbench.ui.ModellerPerspective)" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
       </children>
-      <children xsi:type="menu:ToolControl" xmi:id="_LjOpcNeXEeatkcdPWCJSdQ" elementId="org.knime.workbench.repository.view.RepositoryViewMStack(org.knime.workbench.ui.ModellerPerspective)" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
+      <children xsi:type="menu:ToolControl" xmi:id="_LjOpcNeXEeatkcdPWCJSdQ" elementId="org.knime.workbench.repository.view.RepositoryViewMStack(org.knime.workbench.ui.ModellerPerspective)" toBeRendered="false" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
       </children>
     </trimBars>

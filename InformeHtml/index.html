@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script	src="js/bootstrap.min.js"></script>
 		<script src="js/highcharts/highcharts.js"></script>
-		<!--<script src="js/highcharts/highcharts-3d.js"></script>-->
+		<script src="js/modules/funnel.js"></script>
 		
 		<link rel="stylesheet" href="style.css" />
 
@@ -19,76 +19,45 @@
 		<script src="series/dataTocaPorHora.js"></script>
 		
 		<script>
-			$(document).ready(function() { 
-				
-				<!-- FunChannel-->
-				//*
-				var categories = ['Shopper', 'Interaction', 'Interested', 'Product Zone', 'Shelve Transit', 'Total Customer'];
+				<!-- Funchannel -->
 				$(document).ready(function () {
-					$('#funChannelDiv').highcharts({
-						chart: {
-							type: 'bar'
-						},
-						title: {
-							text: 'Orco'
-						},
-						subtitle: {
-							text: 'Criterya'
-						},
-						xAxis: [{
-							categories: categories,
-							reversed: false,
-							labels: {
-								step: 1
-							}
-						}, { // mirror axis on right side
-							opposite: true,
-							reversed: false,
-							categories: categories,
-							linkedTo: 0,
-							labels: {
-								step: 1
-							}
-						}],
-						yAxis: {
-							title: {
-								text: null
-							},
-							labels: {
-								formatter: function () {
-									return Math.abs(this.value);
-								}
-							}
-						},
-						  credits: {
-						  enabled: false
-						},
-						plotOptions: {
-							series: {
-								stacking: 'normal'
-							},
-							bar: {
-							  dataLabels: {
-								  enabled: true,
-								  formatter: function () {
-								return Highcharts.numberFormat(Math.abs(this.point.y), 0);
-							}
-							  }
-						  }
-						},
-						tooltip: {
-							formatter: function () {
-								return '<b>' + this.series.name + ', ' + this.point.category + '</b><br/>' +
-									'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
-							}
-						},
-
-						series: series
-					});
-				});
-				//*/
-				<!-- fin FanChannel -->
-				
+					Highcharts.chart('funChannelDiv', {
+        chart: {
+            type: 'pyramid',
+            marginRight: 100
+        },
+        title: {
+            text: 'Sales pyramid',
+            x: -50
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                    softConnector: true
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: 'Unique users',
+            data: [
+                ['Website visits',      15654],
+                ['Downloads',            4064],
+                ['Requested price list', 1987],
+                ['Invoice sent',          976],
+                ['Finalized',             846]
+            ]
+        }]
+    });
+	});
+	
+						
+				<!-- fin Funchannel -->
+			
 				<!-- Compras por Hora -->
 				$(document).ready(function () {
 					Highcharts.chart('comprasPorHoraDiv', {
@@ -227,8 +196,8 @@
 						yAxis: {
 							title: {
 								text: null
-							},
-							type: 'logarithmic'
+							}//,
+							//type: 'logarithmic'
 						},
 
 						tooltip: {
@@ -401,7 +370,6 @@
 					});
 				});
 				<!-- fin Toca por Mes -->
-			});
 		</script>
 		
 	</head>
