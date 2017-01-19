@@ -43,7 +43,7 @@
           <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo</tags>
           <tags>persp.actionSet:org.eclipse.ui.actionSet.openFiles</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEddHEeayzITsuNGiTg" selectedElement="_hPqvGtdHEeayzITsuNGiTg" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" containerData="3000" selectedElement="_hPqvFddHEeayzITsuNGiTg">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvEtdHEeayzITsuNGiTg" containerData="1969" selectedElement="_hPqvFddHEeayzITsuNGiTg">
               <children xsi:type="basic:PartStack" xmi:id="_hPqvE9dHEeayzITsuNGiTg" elementId="org.knime.workbench.explorer.viewMStack" visible="false" containerData="3000" selectedElement="_hPqvFNdHEeayzITsuNGiTg">
                 <tags>noFocus</tags>
                 <tags>Minimized</tags>
@@ -60,7 +60,7 @@
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvGtdHEeayzITsuNGiTg" containerData="7000" selectedElement="_hPqvG9dHEeayzITsuNGiTg">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvGtdHEeayzITsuNGiTg" containerData="8031" selectedElement="_hPqvG9dHEeayzITsuNGiTg">
               <children xsi:type="basic:PartSashContainer" xmi:id="_hPqvG9dHEeayzITsuNGiTg" containerData="7000" selectedElement="_hPqvHNdHEeayzITsuNGiTg" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_hPqvHNdHEeayzITsuNGiTg" elementId="org.eclipse.ui.editorss" containerData="7000" ref="_hPlPgNdHEeayzITsuNGiTg"/>
                 <children xsi:type="basic:PartStack" xmi:id="_hPqvHddHEeayzITsuNGiTg" elementId="org.knime.workbench.helpviewMStack" toBeRendered="false" containerData="3000">

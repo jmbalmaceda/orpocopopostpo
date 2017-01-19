@@ -28,10 +28,10 @@
 <entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.json"/>
 <entry key="node-bundle-vendor" type="xstring" value="KNIME Gmbh"/>
 <entry key="node-bundle-version" type="xstring" value="3.1.2.v201603311235"/>
-<entry key="node-feature-name" type="xstring" value="KNIME JSON-Processing"/>
-<entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.json.feature.group"/>
-<entry key="node-feature-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
-<entry key="node-feature-version" type="xstring" value="3.1.2.v201603311235"/>
+<entry key="node-feature-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-symbolic-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-vendor" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-version" type="xstring" value="0.0.0"/>
 <config key="factory_settings"/>
 <entry key="name" type="xstring" value="JSON Row Combiner"/>
 <entry key="hasContent" type="xboolean" value="false"/>

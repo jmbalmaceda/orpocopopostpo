@@ -1,50 +1,56 @@
 var seriesComprasPorSemana = [ {
     "data" : [ {
-      "y" : 33,
+      "y" : 42,
       "x" : Date.UTC(2016,8,8)
     }, {
-      "y" : 33,
+      "y" : 31,
       "x" : Date.UTC(2016,8,15)
     }, {
-      "y" : 81,
+      "y" : 73,
       "x" : Date.UTC(2016,8,22)
     }, {
-      "y" : 149,
+      "y" : 139,
       "x" : Date.UTC(2016,9,20)
     }, {
-      "y" : 75,
+      "y" : 113,
       "x" : Date.UTC(2016,10,10)
     }, {
-      "y" : 123,
+      "y" : 104,
       "x" : Date.UTC(2016,10,17)
     }, {
       "y" : 37,
+      "x" : Date.UTC(2016,10,24)
+    }, {
+      "y" : 35,
       "x" : Date.UTC(2016,11,1)
     }, {
-      "y" : 133,
+      "y" : 112,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Lysoform"
   }, {
     "data" : [ {
-      "y" : 9,
+      "y" : 11,
       "x" : Date.UTC(2016,8,8)
     }, {
-      "y" : 22,
+      "y" : 21,
       "x" : Date.UTC(2016,8,15)
     }, {
-      "y" : 45,
+      "y" : 43,
       "x" : Date.UTC(2016,8,22)
     }, {
-      "y" : 38,
+      "y" : 33,
       "x" : Date.UTC(2016,9,20)
     }, {
-      "y" : 4,
+      "y" : 7,
       "x" : Date.UTC(2016,10,10)
     }, {
       "y" : 4,
       "x" : Date.UTC(2016,10,17)
+    }, {
+      "y" : 4,
+      "x" : Date.UTC(2016,10,24)
     }, {
       "y" : 4,
       "x" : Date.UTC(2016,11,1)
@@ -52,10 +58,13 @@ var seriesComprasPorSemana = [ {
       "y" : 13,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Ayudin"
   }, {
     "data" : [ {
+      "y" : 3,
+      "x" : Date.UTC(2016,8,8)
+    }, {
       "y" : 7,
       "x" : Date.UTC(2016,8,15)
     }, {
@@ -65,20 +74,23 @@ var seriesComprasPorSemana = [ {
       "y" : 7,
       "x" : Date.UTC(2016,9,20)
     }, {
-      "y" : 3,
+      "y" : 7,
       "x" : Date.UTC(2016,10,10)
+    }, {
+      "y" : 1,
+      "x" : Date.UTC(2016,10,24)
     }, {
       "y" : 2,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Espadol"
   }, {
     "data" : [ {
-      "y" : 1,
+      "y" : 3,
       "x" : Date.UTC(2016,8,8)
     }, {
-      "y" : 7,
+      "y" : 5,
       "x" : Date.UTC(2016,8,15)
     }, {
       "y" : 5,
@@ -87,16 +99,16 @@ var seriesComprasPorSemana = [ {
       "y" : 13,
       "x" : Date.UTC(2016,9,20)
     }, {
-      "y" : 1,
+      "y" : 3,
       "x" : Date.UTC(2016,10,10)
     }, {
-      "y" : 20,
+      "y" : 18,
       "x" : Date.UTC(2016,10,17)
     }, {
-      "y" : 15,
+      "y" : 10,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Artefacto Spray Automatico"
   }, {
     "data" : [ {
@@ -106,69 +118,75 @@ var seriesComprasPorSemana = [ {
       "y" : 1,
       "x" : Date.UTC(2016,10,17)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Otros"
   }, {
     "data" : [ ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Automáticos"
   }, {
     "data" : [ {
-      "y" : 36,
+      "y" : 66,
       "x" : Date.UTC(2016,8,8)
     }, {
-      "y" : 55,
+      "y" : 51,
       "x" : Date.UTC(2016,8,15)
     }, {
-      "y" : 52,
+      "y" : 51,
       "x" : Date.UTC(2016,8,22)
     }, {
-      "y" : 122,
+      "y" : 102,
       "x" : Date.UTC(2016,9,20)
     }, {
-      "y" : 55,
+      "y" : 92,
       "x" : Date.UTC(2016,10,10)
     }, {
-      "y" : 15,
+      "y" : 11,
       "x" : Date.UTC(2016,10,17)
     }, {
-      "y" : 2,
+      "y" : 18,
+      "x" : Date.UTC(2016,10,24)
+    }, {
+      "y" : 5,
       "x" : Date.UTC(2016,11,1)
     }, {
-      "y" : 121,
+      "y" : 102,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Otros Aromatizadores"
   }, {
     "data" : [ {
-      "y" : 26,
+      "y" : 73,
       "x" : Date.UTC(2016,8,8)
     }, {
-      "y" : 75,
+      "y" : 86,
       "x" : Date.UTC(2016,8,15)
     }, {
-      "y" : 115,
+      "y" : 138,
       "x" : Date.UTC(2016,8,22)
     }, {
-      "y" : 90,
+      "y" : 149,
       "x" : Date.UTC(2016,9,20)
     }, {
       "y" : 1,
       "x" : Date.UTC(2016,9,27)
     }, {
-      "y" : 34,
+      "y" : 102,
       "x" : Date.UTC(2016,10,10)
     }, {
-      "y" : 48,
+      "y" : 74,
       "x" : Date.UTC(2016,10,17)
     }, {
-      "y" : 24,
+      "y" : 42,
+      "x" : Date.UTC(2016,10,24)
+    }, {
+      "y" : 30,
       "x" : Date.UTC(2016,11,1)
     }, {
-      "y" : 124,
+      "y" : 176,
       "x" : Date.UTC(2016,11,8)
     } ],
-    "type" : "column",
+    "type" : "spline",
     "name" : "Aromatizadores en Aerosol"
   } ];

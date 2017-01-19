@@ -1,3 +1,4 @@
+C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXperiodo
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\toquesXmes
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\toquesXsemana
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\toquesXdia
@@ -5,4 +6,3 @@ C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\toquesXhora
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXmes
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXsemana
 C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXdia
-C:\Users\cito\gitRepos\orpocopopostpo\InformeHtml\resultados\comprasXhora

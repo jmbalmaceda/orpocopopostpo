@@ -1,0 +1,65 @@
+{
+  "series" : [ {
+    "data" : [ [ "Periodo 1",
+       297], [ "Periodo 2",
+       252], [ "Periodo 3",
+       322] ],
+    "type" : "spline",
+    "name" : "Aromatizadores en Aerosol"
+  }, {
+    "data" : [ [ "Periodo 1",
+       13], [ "Periodo 2",
+       16], [ "Periodo 3",
+       28] ],
+    "type" : "spline",
+    "name" : "Artefacto Spray Automatico"
+  }, {
+    "data" : [ [ "Periodo 1",
+       85], [ "Periodo 2",
+       89], [ "Periodo 3",
+       151] ],
+    "type" : "spline",
+    "name" : "Automático"
+  }, {
+    "data" : [ [ "Periodo 1",
+       75], [ "Periodo 2",
+       40], [ "Periodo 3",
+       25] ],
+    "type" : "spline",
+    "name" : "Ayudin"
+  }, {
+    "data" : [ [ "Periodo 1",
+       10], [ "Periodo 2",
+       14], [ "Periodo 3",
+       3] ],
+    "type" : "spline",
+    "name" : "Espadol"
+  }, {
+    "data" : [ [ "Periodo 1",
+       13], [ "Periodo 2",
+       52], [ "Periodo 3",
+       62] ],
+    "type" : "spline",
+    "name" : "Lata AromÃ¡tica Gel"
+  }, {
+    "data" : [ [ "Periodo 1",
+       147], [ "Periodo 2",
+       255], [ "Periodo 3",
+       291] ],
+    "type" : "spline",
+    "name" : "Lysoform"
+  }, {
+    "data" : [ [ "Periodo 2",
+       2], [ "Periodo 3",
+       1] ],
+    "type" : "spline",
+    "name" : "Otros"
+  }, {
+    "data" : [ [ "Periodo 1",
+       168], [ "Periodo 2",
+       194], [ "Periodo 3",
+       136] ],
+    "type" : "spline",
+    "name" : "Otros Aromatizadores"
+  } ]
+}

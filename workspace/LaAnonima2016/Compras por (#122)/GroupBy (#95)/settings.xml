@@ -17,7 +17,7 @@
 <entry key="1" type="xstring" value="Week of year"/>
 </config>
 <config key="ExclList">
-<entry key="array-size" type="xint" value="19"/>
+<entry key="array-size" type="xint" value="20"/>
 <entry key="0" type="xstring" value="Marca temporal"/>
 <entry key="1" type="xstring" value="Fecha"/>
 <entry key="2" type="xstring" value="Hora"/>
@@ -34,9 +34,10 @@
 <entry key="13" type="xstring" value="DuraciÃ³n de la compra"/>
 <entry key="14" type="xstring" value="Col14"/>
 <entry key="15" type="xstring" value="Col15"/>
-<entry key="16" type="xstring" value="Month"/>
-<entry key="17" type="xstring" value="Day of month"/>
-<entry key="18" type="xstring" value="Hour"/>
+<entry key="16" type="xstring" value="Categoria"/>
+<entry key="17" type="xstring" value="Month"/>
+<entry key="18" type="xstring" value="Day of month"/>
+<entry key="19" type="xstring" value="Hour"/>
 </config>
 <entry key="keep_all_columns_selected" type="xboolean" value="false"/>
 </config>
@@ -50,16 +51,26 @@
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="enableHilite" type="xboolean" value="false"/>
+<config key="valueDelimiter_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<entry key="valueDelimiter" type="xstring" value=", "/>
 <config key="sortInMemory_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="sortInMemory" type="xboolean" value="false"/>
+<config key="columnNamePolicy_Internals">
+<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
+<entry key="EnabledStatus" type="xboolean" value="true"/>
+</config>
+<entry key="columnNamePolicy" type="xstring" value="Aggregation method (column name)"/>
 <config key="aggregationColumn">
 <config key="columnNames">
 <entry key="array-size" type="xint" value="2"/>
 <entry key="0" type="xstring" value="Unidades"/>
-<entry key="1" type="xstring" value="Producto"/>
+<entry key="1" type="xstring" value="Categoria"/>
 </config>
 <config key="columnTypes">
 <entry key="array-size" type="xint" value="2"/>
@@ -86,11 +97,6 @@
 <config key="aggregationOperatorSettings"/>
 <config key="patternAggregators"/>
 <config key="dataTypeAggregators"/>
-<config key="columnNamePolicy_Internals">
-<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
-</config>
-<entry key="columnNamePolicy" type="xstring" value="Aggregation method (column name)"/>
 <config key="retainOrder_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -101,11 +107,6 @@
 <entry key="EnabledStatus" type="xboolean" value="true"/>
 </config>
 <entry key="inMemory" type="xboolean" value="false"/>
-<config key="valueDelimiter_Internals">
-<entry key="SettingsModelID" type="xstring" value="SMID_string"/>
-<entry key="EnabledStatus" type="xboolean" value="true"/>
-</config>
-<entry key="valueDelimiter" type="xstring" value=", "/>
 <config key="nodeVersion_Internals">
 <entry key="SettingsModelID" type="xstring" value="SMID_integer"/>
 <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -120,10 +121,10 @@
 <entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base"/>
 <entry key="node-bundle-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
 <entry key="node-bundle-version" type="xstring" value="3.1.2.v201603300837"/>
-<entry key="node-feature-name" type="xstring" value="KNIME Core"/>
-<entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.base.feature.group"/>
-<entry key="node-feature-vendor" type="xstring" value="KNIME GmbH, Konstanz, Germany"/>
-<entry key="node-feature-version" type="xstring" value="3.1.2.v201603311235"/>
+<entry key="node-feature-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-symbolic-name" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-vendor" type="xstring" isnull="true" value=""/>
+<entry key="node-feature-version" type="xstring" value="0.0.0"/>
 <config key="factory_settings"/>
 <entry key="name" type="xstring" value="GroupBy"/>
 <entry key="hasContent" type="xboolean" value="false"/>

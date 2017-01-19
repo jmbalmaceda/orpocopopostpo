@@ -28,7 +28,7 @@
 <entry key="hasDate" type="xboolean" value="true"/>
 <entry key="hasTime" type="xboolean" value="false"/>
 <entry key="hasMillis" type="xboolean" value="false"/>
-<entry key="timeInMillis" type="xlong" value="1319068800000"/>
+<entry key="timeInMillis" type="xlong" value="1473033600000"/>
 </config>
 </config>
 <config key="upper_bound">
@@ -37,7 +37,7 @@
 <entry key="hasDate" type="xboolean" value="true"/>
 <entry key="hasTime" type="xboolean" value="false"/>
 <entry key="hasMillis" type="xboolean" value="false"/>
-<entry key="timeInMillis" type="xlong" value="1481328000000"/>
+<entry key="timeInMillis" type="xlong" value="1481414400000"/>
 </config>
 </config>
 </config>
