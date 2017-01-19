@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<script	src="js/jquery.min.js"></script>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script	src="js/bootstrap.min.js"></script>
@@ -10,52 +11,52 @@
 
 		<script src="series/dataFunChannel.js"></script>
 		<script src="series/dataComprasPorMes.js"></script>
+		<script src="series/dataComprasPorPeriodo.js"></script>
 		<script src="series/dataComprasPorSemana.js"></script>
 		<script src="series/dataComprasPorDia.js"></script>
 		<script src="series/dataComprasPorHora.js"></script>
 		<script src="series/dataTocaPorMes.js"></script>
+		<script src="series/dataTocaPorPeriodo.js"></script>
 		<script src="series/dataTocaPorSemana.js"></script>
 		<script src="series/dataTocaPorDia.js"></script>
 		<script src="series/dataTocaPorHora.js"></script>
 		
 		<script>
-				<!-- Funchannel -->
-				$(document).ready(function () {
-					Highcharts.chart('funChannelDiv', {
-        chart: {
-            type: 'pyramid',
-            marginRight: 100
-        },
-        title: {
-            text: 'Sales pyramid',
-            x: -50
-        },
-        plotOptions: {
-            series: {
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
-                    softConnector: true
-                }
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        series: [{
-            name: 'Unique users',
-            data: [
-                ['Website visits',      15654],
-                ['Downloads',            4064],
-                ['Requested price list', 1987],
-                ['Invoice sent',          976],
-                ['Finalized',             846]
-            ]
-        }]
-    });
-	});
-	
-						
+					<!-- Funchannel -->
+					$(document).ready(function () {
+						Highcharts.chart('funChannelDiv', {
+			        chart: {
+			            type: 'pyramid',
+			            marginRight: 100
+			        },
+			        title: {
+			            text: 'Sales pyramid',
+			            x: -50
+			        },
+			        plotOptions: {
+			            series: {
+			                dataLabels: {
+			                    enabled: true,
+			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+			                    softConnector: true
+			                }
+			            }
+			        },
+			        legend: {
+			            enabled: false
+			        },
+			        series: [{
+			            name: 'Unique users',
+			            data: [
+			                ['Website visits',      15654],
+			                ['Downloads',            4064],
+			                ['Requested price list', 1987],
+			                ['Invoice sent',          976],
+			                ['Finalized',             846]
+			            ]
+			        }]
+			    });
+				});					
 				<!-- fin Funchannel -->
 			
 				<!-- Compras por Hora -->
@@ -175,6 +176,43 @@
 				});
 				<!-- fin Compras por Semana -->
 				
+				<!-- Compras por Periodo -->
+				$(document).ready(function () {
+					Highcharts.chart('comprasPorPeriodoDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Compras por Periodo'
+						},
+
+						xAxis: {
+							type: 'category'
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesComprasPorPeriodo
+					});
+				});
+				<!-- fin Compras por Periodo -->
+				
+
 				<!-- Compras por Mes -->
 				$(document).ready(function () {
 					Highcharts.chart('comprasPorMesDiv', {
@@ -332,6 +370,42 @@
 				});
 				<!-- fin Toca por Semana -->
 				
+				<!-- Toca por Periodo -->
+				$(document).ready(function () {
+					Highcharts.chart('tocaPorPeriodoDiv', {
+						chart: {
+							type: 'spline',
+							zoomType: 'x'
+						},
+						title: {
+							text: 'Interacciones sin Compra por Periodo'
+						},
+
+						xAxis: {
+							type: 'category'
+						},
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							type: 'logarithmic'
+						},
+
+						tooltip: {
+							crosshairs: true,
+							//shared: true
+						},
+
+						legend: {
+							enabled: true
+						},
+
+						series: seriesTocaPorPeriodo
+					});
+				});
+				<!-- fin Compras por Periodo -->
+
 				<!-- Toca por Mes -->
 				$(document).ready(function () {
 					Highcharts.chart('tocaPorMesDiv', {
@@ -387,6 +461,9 @@
 							<a href="#comprasPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Mes</a>
 						</li>
 						<li>
+							<a href="#comprasPorPeriodo-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Periodo</a>
+						</li>
+						<li>
 							<a href="#comprasPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Compras por Semana</a>
 						</li>
 						<li>
@@ -402,6 +479,9 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a href="#tocaPorMes-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Mes</a>
+						</li>
+						<li>
+							<a href="#tocaPorPeriodo-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Periodo</a>
 						</li>
 						<li>
 							<a href="#tocaPorSemana-panel" aria-controls="settings" role="tab" data-toggle="tab">Interacciones por Semana</a>
@@ -431,6 +511,9 @@
 				<div role="tabpanel" class="tab-pane fade" id="comprasPorSemana-panel" class="comprasPorSemana-tab">
 					<div class="chart-container" id="comprasPorSemanaDiv"></div>
 				</div>
+				<div role="tabpanel" class="tab-pane fade" id="comprasPorPeriodo-panel" class="comprasPorPeriodo-tab">
+					<div class="chart-container" id="comprasPorPeriodoDiv"></div>
+				</div>
 				<div role="tabpanel" class="tab-pane fade" id="comprasPorMes-panel" class="comprasPorMes-tab">
 					<div class="chart-container" id="comprasPorMesDiv"></div>
 				</div>
@@ -444,6 +527,9 @@
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="tocaPorSemana-panel" class="tocaPorSemana-tab">
 					<div class="chart-container" id="tocaPorSemanaDiv"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tocaPorPeriodo-panel" class="tocaPorPeriodo-tab">
+					<div class="chart-container" id="tocaPorPeriodoDiv"></div>
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="tocaPorMes-panel" class="tocaPorMes-tab">
 					<div class="chart-container" id="tocaPorMesDiv"></div>
